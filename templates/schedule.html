@@ -1,0 +1,19 @@
+{% extends "main.html"  %}
+
+{% block body %}
+  <form method="POST" action = "">
+    {{ F.hidden_tag() }}
+    {{F.start.label}} {{F.start(placeholder = "start MM/DD/YYYY")}}
+    {{F.end.label}} {{F.end(placeholder = "end MM/DD/YYYY")}}
+    {{F.submit}}
+  </form>
+
+  {{win_p}}
+
+  {% if data %}
+    <div id = "schedule">
+      Score: {{ data[0]["summary"]}}
+    </div>
+  {% endif %}
+
+{%endblock%}

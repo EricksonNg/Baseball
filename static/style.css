@@ -1,0 +1,67 @@
+/*---------- Body ---------------*/
+body{
+  background-color:white;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+/*-------- navigation bar----------- */
+#nav_bar{
+  font-size: 20px;
+  font-family: sans-serif;
+}
+#nav_bar ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color:#333; 
+  position:fixed;
+  top:0;
+}
+
+#nav_bar li a{
+  border-right: 1px solid #bbb;
+  display:block;
+  text-align: center;
+  padding: 10px;
+  padding-top:14px;
+  color:white;
+  text-decoration: none;
+  float:right;
+} 
+
+#nav_bar li a:hover:not(.active){
+  background-color:lightgreen;
+  color:#333;
+} 
+
+#nav_bar li a.active{
+  border-right:none;
+  color:whitesmoke;
+  float:left;
+  padding-left:10%;
+  font-size:25px;
+
+}
+
+/* ----------------------Credit-------------- */
+#credit{
+  color: white;
+  text-align: center;
+  font-family: Times New Roman;
+  margin-top: 564px;
+  background-color: rgba(0,0,0,0.5);
+
+}
+
+
+
+#body_div{
+  margin-top:10%;
+  padding:100px;
+}
+
+/* #chart{
+  
+} */
