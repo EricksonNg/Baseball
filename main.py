@@ -15,7 +15,6 @@ def homepage():
     return render_template(
         "index.html")
 
-
 @app.route("/about")
 def about():
     return render_template(
@@ -25,7 +24,6 @@ def about():
 @app.route("/hitting", methods=["GET", "POST"])
 def hitting():
     from hit2019 import p2019, pg2019
-
     form = PlayerSearchForm()
     if form.validate_on_submit():
         print("POST REQUEST COMPLETED!")
