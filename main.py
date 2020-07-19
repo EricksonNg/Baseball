@@ -3,7 +3,6 @@ from forms import TeamSearchForm, ScheduleSearchForm, PlayerSearchForm
 import mlbapi
 from pitching_everything2020 import pitching_everything2020
 from hitting_everything2020 import hitting_everything2020
-from test import test
 from lookup import lookup
 
 lookup()
