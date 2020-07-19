@@ -3,9 +3,6 @@ from forms import TeamSearchForm, ScheduleSearchForm, PlayerSearchForm
 import mlbapi
 from pitching_everything2020 import pitching_everything2020
 from hitting_everything2020 import hitting_everything2020
-from lookup import lookup
-
-lookup()
 
 app = Flask('app')
 app.config["SECRET_KEY"] = "1234"
