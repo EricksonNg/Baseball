@@ -3,9 +3,9 @@ def p2019(playername, category):
   with open("2019/"+playername+".txt", "r") as FILE:
     content = FILE.read()
     content_dict = eval( content )
-    index = content_dict[playername]['2019']['progression']
+    index = content_dict[playername]['2019']['hitting']['progression']
     ID = content_dict[playername]["ID"]
-    dates=content_dict[playername]['2019']['dates']
+    dates=content_dict[playername]['2019']['hitting']['dates']
     avg=index['averages']
     obp=index['obp']
     slg=index['slg']
@@ -254,9 +254,9 @@ def pg2019(playername,category):
   with open("2019/"+playername+".txt", "r") as FILE:
     content = FILE.read()
     content_dict = eval( content )
-    index = content_dict[playername]['2019']['per_game']
+    index = content_dict[playername]['2019']['hitting']['per_game']
     ID = content_dict[playername]["ID"]
-    dates=content_dict[playername]['2019']['dates']
+    dates=content_dict[playername]['2019']['hitting']['dates']
     ab=index['ab']
     k=index['strikeouts']
     h=index['hits']

@@ -1,9 +1,8 @@
 from os import path
 import statsapi
 
-
 def hitting_everything2020():
-    sched = statsapi.schedule(start_date='', end_date='', team=137)
+    sched = statsapi.schedule(start_date='07/23/2020', end_date='09/27/2020', team=137)
     for i in range(len(sched)):
         gameId = sched[i]["game_id"]
         game_date = sched[i]["game_date"]
@@ -13,13 +12,11 @@ def hitting_everything2020():
                 if sched[i]['home_name'] == "San Francisco Giants":
                     if ID in scoredata['home']['players']:
                         if scoredata['home']['players'][ID]['stats']['batting'] != {}:
-                            if scoredata['home']['players'][ID]['position']['abbreviation'] != 'P':
-                                h_add(game_date, scoredata, ID)
+                            h_add(game_date, scoredata, ID)
                 else:
                     if ID in scoredata['away']['players']:
                         if scoredata['away']['players'][ID]['stats']['batting'] != {}:
-                            if scoredata['away']['players'][ID]['position']['abbreviation'] != 'P':
-                                a_add(game_date, scoredata, ID)
+                            a_add(game_date, scoredata, ID)
 
 
 def h_add(game_date, scoredata, ID):
@@ -76,28 +73,63 @@ def h_add(game_date, scoredata, ID):
             else:
                 print("read success for", playername)
     else:
-        print("Creating File For", playername)
-        with open("2020/" + str(playername) + ".txt", "w") as f:
-            f.write(
-                "{'" + playername + "': {'ID':'" + ID + "', '2020': {'dates': [], 'progression': {'averages': [], 'obp': [], "
-                                                        "'slg': [], 'ops': [], 'runs': [], 'doubles': [], 'triples': [], "
-                                                        "'homeruns': [], 'strikeouts': [], 'walks': [], 'hits': [], 'ab': [], "
-                                                        "'sb': [], 'rbi': [], 'lob': []}, 'per_game': {'ab': [], 'strikeouts': "
-                                                        "[], 'hits': [], 'walks': [], 'runs': [], 'rbi': [], 'sb': [], "
-                                                        "'lob': [], 'doubles': [], 'triples': [], 'homeruns': []}}}}")
-        with open("2020/" + str(playername) + ".txt", "r") as FILE:
-            content = FILE.read()
-            content_dict = eval(content)
+        if scoredata['home']['players'][ID]['position']['abbreviation'] == 'P':
+            print("Creating File For Pitcher", playername)
+            with open("2020/" + str(playername) + ".txt", "w") as f:
+                f.write(
+                    "{'" + playername + "': {'ID':'" + ID + "', '2020': { 'pitching' : {'dates': [], 'progression': {'era': [], 'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'doubles': [], 'triples': [], 'ab': [], 'obp': [], 'wins': [], 'losses': [], 'holds': [], 'blown_saves': []}, 'per_game': {'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'pitches': [], 'strikes': []}}, 'hitting': {'dates': [], 'progression': {'averages': [], 'obp': [], 'slg': [], 'ops': [], 'runs': [], 'doubles': [], 'triples': [], 'homeruns': [], 'strikeouts': [], 'walks': [], 'hits': [], 'ab': [], 'sb': [], 'rbi': [], 'lob': []}, 'per_game': {'ab': [], 'strikeouts': [], 'hits': [], 'walks': [], 'runs': [], 'rbi': [], 'sb': [], 'lob': [], 'doubles': [], 'triples': [], 'homeruns': []}}}}}")
+            with open("2020/" + str(playername) + ".txt", "r") as FILE:
+                content = FILE.read()
+                content_dict = eval(content)
+        else:
+            if playername != "Pablo Sandoval":
+                print("Creating File For Hitter", playername)
+                with open("2020/" + str(playername) + ".txt", "w") as f:
+                    f.write(
+                        "{'" + playername + "': {'ID':'" + ID + "', '2020': { 'hitting' : {'dates': [], 'progression': {'averages': [], 'obp': [], "
+                                                                "'slg': [], 'ops': [], 'runs': [], 'doubles': [], 'triples': [], "
+                                                                "'homeruns': [], 'strikeouts': [], 'walks': [], 'hits': [], 'ab': [], "
+                                                                "'sb': [], 'rbi': [], 'lob': []}, 'per_game': {'ab': [], 'strikeouts': "
+                                                                "[], 'hits': [], 'walks': [], 'runs': [], 'rbi': [], 'sb': [], "
+                                                                "'lob': [], 'doubles': [], 'triples': [], 'homeruns': []}}}}}")
+                with open("2020/" + str(playername) + ".txt", "r") as FILE:
+                    content = FILE.read()
+                    content_dict = eval(content)
+            else:
+                print("Creating File For 3B/1B//P", playername)
+                with open("2020/" + str(playername) + ".txt", "w") as f:
+                    f.write(
+                        "{'" + playername + "': {'ID':'" + ID + "', '2020': { 'hitting' : {{'dates': [], 'progression': "
+                                                                "{'averages': [], 'obp': [], 'slg': [], 'ops': [], "
+                                                                "'runs': [], 'doubles': [], 'triples': [], "
+                                                                "'homeruns': [], 'strikeouts': [], 'walks': [], "
+                                                                "'hits': [], 'ab': [], 'sb': [], 'rbi': [], "
+                                                                "'lob': []}, 'per_game': {'ab': [], 'strikeouts': [], "
+                                                                "'hits': [], 'walks': [], 'runs': [], 'rbi': [], "
+                                                                "'sb': [], 'lob': [], 'doubles': [], 'triples': [], "
+                                                                "'homeruns': []}}}, 'pitching' : {'dates': [], "
+                                                                "'progression': {'era': [], 'innings': [], "
+                                                                "'hits': [], 'runs': [], 'earned_runs': [], "
+                                                                "'walks': [], 'strikeouts': [], 'homeruns': [], "
+                                                                "'doubles': [], 'triples': [], 'ab': [], 'obp': [], "
+                                                                "'wins': [], 'losses': [], 'holds': [], "
+                                                                "'blown_saves': []}, 'per_game': {'innings': [], "
+                                                                "'hits': [], 'runs': [], 'earned_runs': [], "
+                                                                "'walks': [], 'strikeouts': [], 'homeruns': [], "
+                                                                "'pitches': [], 'strikes': []}}}}}")
+                with open("2020/" + str(playername) + ".txt", "r") as FILE:
+                    content = FILE.read()
+                    content_dict = eval(content)
 
-    if game_date not in content_dict[playername]['2020']['dates']:
+    if game_date not in content_dict[playername]['2020']['hitting']['dates']:
         print("Yes")
         with open("2020/" + str(playername) + ".txt", "w") as f:
             try:
-                content_dict[playername]['2020']['dates'].append(game_date)
+                content_dict[playername]['2020']['hitting']['dates'].append(game_date)
                 for i in range(len(p_categories)):
-                    content_dict[playername]['2020']['progression'][p_names[i]].append(p_categories[i])
+                    content_dict[playername]['2020']['hitting']['progression'][p_names[i]].append(p_categories[i])
                 for i in range(len(pg_categories)):
-                    content_dict[playername]['2020']['per_game'][pg_names[i]].append(pg_categories[i])
+                    content_dict[playername]['2020']['hitting']['per_game'][pg_names[i]].append(pg_categories[i])
                 f.write(str(content_dict))
                 print("Write Success")
             except Exception as e:
@@ -159,28 +191,46 @@ def a_add(game_date, scoredata, ID):
             else:
                 print("read success for", playername)
     else:
-        print("Creating File For", playername)
-        with open("2020/" + str(playername) + ".txt", "w") as f:
-            f.write(
-                "{'" + playername + "': {'ID':'" + ID + "', '2020': {'dates': [], 'progression': {'averages': [], 'obp': [], "
-                                                        "'slg': [], 'ops': [], 'runs': [], 'doubles': [], 'triples': [], "
-                                                        "'homeruns': [], 'strikeouts': [], 'walks': [], 'hits': [], 'ab': [], "
-                                                        "'sb': [], 'rbi': [], 'lob': []}, 'per_game': {'ab': [], 'strikeouts': "
-                                                        "[], 'hits': [], 'walks': [], 'runs': [], 'rbi': [], 'sb': [], "
-                                                        "'lob': [], 'doubles': [], 'triples': [], 'homeruns': []}}}}")
-        with open("2020/" + str(playername) + ".txt", "r") as FILE:
-            content = FILE.read()
-            content_dict = eval(content)
+        if scoredata['away']['players'][ID]['position']['abbreviation'] == 'P':
+            print("Creating File For Pitcher", playername)
+            with open("2020/" + str(playername) + ".txt", "w") as f:
+                f.write(
+                    "{'" + playername + "': {'ID':'" + ID + "', '2020': { 'pitching' : {'dates': [], 'progression': {'era': [], 'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'doubles': [], 'triples': [], 'ab': [], 'obp': [], 'wins': [], 'losses': [], 'holds': [], 'blown_saves': []}, 'per_game': {'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'pitches': [], 'strikes': []}}, 'hitting': {'dates': [], 'progression': {'averages': [], 'obp': [], 'slg': [], 'ops': [], 'runs': [], 'doubles': [], 'triples': [], 'homeruns': [], 'strikeouts': [], 'walks': [], 'hits': [], 'ab': [], 'sb': [], 'rbi': [], 'lob': []}, 'per_game': {'ab': [], 'strikeouts': [], 'hits': [], 'walks': [], 'runs': [], 'rbi': [], 'sb': [], 'lob': [], 'doubles': [], 'triples': [], 'homeruns': []}}}}}")
+            with open("2020/" + str(playername) + ".txt", "r") as FILE:
+                content = FILE.read()
+                content_dict = eval(content)
+        else:
+            if playername != "Pablo Sandoval":
+                print("Creating File For Hitter", playername)
+                with open("2020/" + str(playername) + ".txt", "w") as f:
+                    f.write(
+                        "{'" + playername + "': {'ID':'" + ID + "', '2020': { 'hitting' : {'dates': [], 'progression': {'averages': [], 'obp': [], "
+                                                                "'slg': [], 'ops': [], 'runs': [], 'doubles': [], 'triples': [], "
+                                                                "'homeruns': [], 'strikeouts': [], 'walks': [], 'hits': [], 'ab': [], "
+                                                                "'sb': [], 'rbi': [], 'lob': []}, 'per_game': {'ab': [], 'strikeouts': "
+                                                                "[], 'hits': [], 'walks': [], 'runs': [], 'rbi': [], 'sb': [], "
+                                                                "'lob': [], 'doubles': [], 'triples': [], 'homeruns': []}}}}}")
+                with open("2020/" + str(playername) + ".txt", "r") as FILE:
+                    content = FILE.read()
+                    content_dict = eval(content)
+            else:
+                print("Creating File For 3B/1B//P", playername)
+                with open("2020/" + str(playername) + ".txt", "w") as f:
+                    f.write(
+                        "{'" + playername + "': {'ID':'" + ID + "', '2020': { 'hitting' : {'dates': [], 'progression': {'averages': [], 'obp': [], 'slg': [], 'ops': [], 'runs': [], 'doubles': [], 'triples': [], 'homeruns': [], 'strikeouts': [], 'walks': [], 'hits': [], 'ab': [], 'sb': [], 'rbi': [], 'lob': []}, 'per_game': {'ab': [], 'strikeouts': [], 'hits': [], 'walks': [], 'runs': [], 'rbi': [], 'sb': [], 'lob': [], 'doubles': [], 'triples': [], 'homeruns': []}}, 'pitching': {'dates': [], 'progression': {'era': [], 'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'doubles': [], 'triples': [], 'ab': [], 'obp': [], 'wins': [], 'losses': [], 'holds': [], 'blown_saves': []}, 'per_game': {'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'pitches': [], 'strikes': []}}}}}")
+                with open("2020/" + str(playername) + ".txt", "r") as FILE:
+                    content = FILE.read()
+                    content_dict = eval(content)
 
-    if game_date not in content_dict[playername]['2020']['dates']:
+    if game_date not in content_dict[playername]['2020']['hitting']['dates']:
         print("Yes")
         with open("2020/" + str(playername) + ".txt", "w") as f:
             try:
-                content_dict[playername]['2020']['dates'].append(game_date)
+                content_dict[playername]['2020']['hitting']['dates'].append(game_date)
                 for i in range(len(p_categories)):
-                    content_dict[playername]['2020']['progression'][p_names[i]].append(p_categories[i])
+                    content_dict[playername]['2020']['hitting']['progression'][p_names[i]].append(p_categories[i])
                 for i in range(len(pg_categories)):
-                    content_dict[playername]['2020']['per_game'][pg_names[i]].append(pg_categories[i])
+                    content_dict[playername]['2020']['hitting']['per_game'][pg_names[i]].append(pg_categories[i])
                 f.write(str(content_dict))
                 print("Write Success")
             except Exception as e:
