@@ -7,7 +7,7 @@ def pitching_everything2020():
         gameId = sched[i]["game_id"]
         game_date = sched[i]["game_date"]
         scoredata = statsapi.boxscore_data(gameId)
-        if sched[i]["game_type"] == "R":
+        if sched[i]["game_type"] == "R" and sched[i]['status']=="Final":
             for ID in scoredata['playerInfo']:
                 if sched[i]['home_name'] == "San Francisco Giants":
                     if ID in scoredata['home']['players']:

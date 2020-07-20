@@ -1,11 +1,14 @@
 from flask import Flask, render_template, request
 from forms import ScheduleSearchForm, PlayerSearchForm
 import mlbapi
+from hitting_everything2020 import hitting_everything2020
+from pitching_everything2020 import pitching_everything2020
 from exhibition_hitting import exhibition_hitting
 from exhibition_pitching import exhibition_pitching
 
+hitting_everything2020()
 exhibition_hitting()
-
+exhibition_pitching()
 
 app = Flask('app')
 app.config["SECRET_KEY"] = "1234"
