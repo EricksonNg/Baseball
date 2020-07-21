@@ -2,12 +2,12 @@ from os import path
 import statsapi
 
 def exhibition_hitting():
-    sched = statsapi.schedule(start_date='07/20/2020', end_date='07/21/2020', team=137)
+    sched = statsapi.schedule(start_date='02/19/2020', end_date='07/21/2020', team=137)
     for i in range(len(sched)):
         gameId = sched[i]["game_id"]
         game_date = sched[i]["game_date"]
         scoredata = statsapi.boxscore_data(gameId)
-        if sched[i]["game_type"] == "S" and sched[i]['status']=="Final":
+        if sched[i]["game_type"] == "S" and sched[i]['status']=="Final" or "Game Over":
             for ID in scoredata['playerInfo']:
                 if sched[i]['home_name'] == "San Francisco Giants":
                     if ID in scoredata['home']['players']:
@@ -17,7 +17,6 @@ def exhibition_hitting():
                     if ID in scoredata['away']['players']:
                         if scoredata['away']['players'][ID]['stats']['batting'] != {}:
                             a_add(game_date, scoredata, ID)
-
 
 def h_add(game_date, scoredata, ID):
     index = scoredata['home']['players'][ID]
@@ -103,24 +102,24 @@ def h_add(game_date, scoredata, ID):
                 print("Creating File For 3B/1B//P", playername)
                 with open("exhibition/" + str(playername) + ".txt", "w") as f:
                     f.write(
-                        "{'" + playername + "': {'ID':'" + ID + "', '2020': { 'hitting' : {{'dates': [], 'progression': "
-                                                                "{'averages': [], 'obp': [], 'slg': [], 'ops': [], "
-                                                                "'runs': [], 'doubles': [], 'triples': [], "
-                                                                "'homeruns': [], 'strikeouts': [], 'walks': [], "
-                                                                "'hits': [], 'ab': [], 'sb': [], 'rbi': [], "
-                                                                "'lob': []}, 'per_game': {'ab': [], 'strikeouts': [], "
-                                                                "'hits': [], 'walks': [], 'runs': [], 'rbi': [], "
-                                                                "'sb': [], 'lob': [], 'doubles': [], 'triples': [], "
-                                                                "'homeruns': []}}}, 'pitching' : {'dates': [], "
-                                                                "'progression': {'era': [], 'innings': [], "
-                                                                "'hits': [], 'runs': [], 'earned_runs': [], "
-                                                                "'walks': [], 'strikeouts': [], 'homeruns': [], "
-                                                                "'doubles': [], 'triples': [], 'ab': [], 'obp': [], "
-                                                                "'wins': [], 'losses': [], 'holds': [], "
-                                                                "'blown_saves': []}, 'per_game': {'innings': [], "
-                                                                "'hits': [], 'runs': [], 'earned_runs': [], "
-                                                                "'walks': [], 'strikeouts': [], 'homeruns': [], "
-                                                                "'pitches': [], 'strikes': []}}}}}")
+                        "{'" + playername + "': {'ID':'" + ID + "', '2020': { 'hitting' : {'dates': [], "
+                                                                "'progression': {'averages': [], 'obp': [], "
+                                                                "'slg': [], 'ops': [], 'runs': [], 'doubles': [], "
+                                                                "'triples': [], 'homeruns': [], 'strikeouts': [], "
+                                                                "'walks': [], 'hits': [], 'ab': [], 'sb': [], "
+                                                                "'rbi': [], 'lob': []}, 'per_game': {'ab': [], "
+                                                                "'strikeouts': [], 'hits': [], 'walks': [], "
+                                                                "'runs': [], 'rbi': [], 'sb': [], 'lob': [], "
+                                                                "'doubles': [], 'triples': [], 'homeruns': []}}, "
+                                                                "'pitching': {'dates': [], 'progression': {'era': [], "
+                                                                "'innings': [], 'hits': [], 'runs': [], "
+                                                                "'earned_runs': [], 'walks': [], 'strikeouts': [], "
+                                                                "'homeruns': [], 'doubles': [], 'triples': [], "
+                                                                "'ab': [], 'obp': [], 'wins': [], 'losses': [], "
+                                                                "'holds': [], 'blown_saves': []}, 'per_game': {"
+                                                                "'innings': [], 'hits': [], 'runs': [], "
+                                                                "'earned_runs': [], 'walks': [], 'strikeouts': [], "
+                                                                "'homeruns': [], 'pitches': [], 'strikes': []}}}}}")
                 with open("exhibition/" + str(playername) + ".txt", "r") as FILE:
                     content = FILE.read()
                     content_dict = eval(content)

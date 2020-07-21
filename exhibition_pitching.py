@@ -2,12 +2,12 @@ from os import path
 import statsapi
 
 def exhibition_pitching():
-    sched = statsapi.schedule(start_date='07/20/2020', end_date='07/21/2020', team=137)
+    sched = statsapi.schedule(start_date='02/19/2020', end_date='07/21/2020', team=137)
     for i in range(len(sched)):
         gameId = sched[i]["game_id"]
         game_date = sched[i]["game_date"]
         scoredata = statsapi.boxscore_data(gameId)
-        if sched[i]["game_type"] == "S" and sched[i]['status']=="Final":
+        if sched[i]["game_type"] == "S" and sched[i]['status']=="Final" or "Game Over":
             for ID in scoredata['playerInfo']:
                 if sched[i]['home_name'] == "San Francisco Giants":
                     if ID in scoredata['home']['players']:
