@@ -7,7 +7,7 @@ def pitching_everything2020():
         gameId = sched[i]["game_id"]
         game_date = sched[i]["game_date"]
         scoredata = statsapi.boxscore_data(gameId)
-        if sched[i]["game_type"] == "R" and sched[i]['status']=="Final":
+        if sched[i]["game_type"] == "R" and sched[i]['status']=="Final" or "Game Over":
             for ID in scoredata['playerInfo']:
                 if sched[i]['home_name'] == "San Francisco Giants":
                     if ID in scoredata['home']['players']:
@@ -61,6 +61,7 @@ def h_add(game_date, scoredata, ID):
     pg_names = ['innings', 'hits', 'runs', 'earned_runs', 'walks', 'strikeouts', 'homeruns', 'pitches', 'strikes']
 
     if path.exists("2020/" + playername + ".txt"):
+        print("============================================")
         print("File Exists For", playername)
         with open("2020/" + str(playername) + ".txt", "r") as FILE:
             content = FILE.read()
@@ -70,8 +71,9 @@ def h_add(game_date, scoredata, ID):
                 print("we got an error ", e)
                 print("Database Error ")
             else:
-                print("read success for", playername)
+                print("Read success for", playername)
     else:
+        print("============================================")
         print("Creating File For Pitcher", playername)
         with open("2020/" + str(playername) + ".txt", "w") as f:
             f.write(
@@ -81,19 +83,24 @@ def h_add(game_date, scoredata, ID):
             content_dict = eval(content)
 
     if game_date not in content_dict[playername]['2020']['pitching']['dates']:
-        print("Yes")
+        print("-----Stats not added yet for", game_date+"-----")
         with open("2020/" + str(playername) + ".txt", "w") as f:
             try:
                 content_dict[playername]['2020']['pitching']['dates'].append(game_date)
                 for i in range(len(p_categories)):
                     content_dict[playername]['2020']['pitching']['progression'][p_names[i]].append(p_categories[i])
+                    print(p_names[i], "(p) added to "+playername)
                 for i in range(len(pg_categories)):
                     content_dict[playername]['2020']['pitching']['per_game'][pg_names[i]].append(pg_categories[i])
+                    print(pg_names[i], "(pg) added to "+playername)
                 f.write(str(content_dict))
-                print("Write Success")
+                print("============================================")
             except Exception as e:
                 print("we got an error ", e)
                 print("Database Error ")
+    else:
+        print("-----Stats already added for", game_date+"-----")
+        print("============================================")
 
 
 def a_add(game_date, scoredata, ID):
@@ -136,6 +143,7 @@ def a_add(game_date, scoredata, ID):
     pg_names = ['innings', 'hits', 'runs', 'earned_runs', 'walks', 'strikeouts', 'homeruns', 'pitches', 'strikes']
 
     if path.exists("2020/" + playername + ".txt"):
+        print("============================================")
         print("File Exists For", playername)
         with open("2020/" + str(playername) + ".txt", "r") as FILE:
             content = FILE.read()
@@ -145,9 +153,10 @@ def a_add(game_date, scoredata, ID):
                 print("we got an error ", e)
                 print("Database Error ")
             else:
-                print("read success for", playername)
+                print("Read success for", playername)
     else:
         print("Creating File For Pitcher", playername)
+        print("============================================")
         with open("2020/" + str(playername) + ".txt", "w") as f:
             f.write(
                 "{'" + playername + "': {'ID':'" + ID + "', '2020': { 'pitching' : {'dates': [], 'progression': {'era': [], 'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'doubles': [], 'triples': [], 'ab': [], 'obp': [], 'wins': [], 'losses': [], 'holds': [], 'blown_saves': []}, 'per_game': {'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'pitches': [], 'strikes': []}}, 'hitting': {'dates': [], 'progression': {'averages': [], 'obp': [], 'slg': [], 'ops': [], 'runs': [], 'doubles': [], 'triples': [], 'homeruns': [], 'strikeouts': [], 'walks': [], 'hits': [], 'ab': [], 'sb': [], 'rbi': [], 'lob': []}, 'per_game': {'ab': [], 'strikeouts': [], 'hits': [], 'walks': [], 'runs': [], 'rbi': [], 'sb': [], 'lob': [], 'doubles': [], 'triples': [], 'homeruns': []}}}}}")
@@ -156,16 +165,21 @@ def a_add(game_date, scoredata, ID):
             content_dict = eval(content)
 
     if game_date not in content_dict[playername]['2020']['pitching']['dates']:
-        print("Yes")
+        print("-----Stats not added yet for", game_date+"-----")
         with open("2020/" + str(playername) + ".txt", "w") as f:
             try:
                 content_dict[playername]['2020']['pitching']['dates'].append(game_date)
                 for i in range(len(p_categories)):
                     content_dict[playername]['2020']['pitching']['progression'][p_names[i]].append(p_categories[i])
+                    print(p_names[i], "(p) added to "+playername)
                 for i in range(len(pg_categories)):
                     content_dict[playername]['2020']['pitching']['per_game'][pg_names[i]].append(pg_categories[i])
+                    print(pg_names[i], "(pg) added to "+playername)
                 f.write(str(content_dict))
-                print("Write Success")
+                print("============================================")
             except Exception as e:
                 print("we got an error ", e)
                 print("Database Error ")
+    else:
+        print("-----Stats already added for", game_date+"-----")
+        print("============================================")
