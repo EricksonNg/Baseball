@@ -6,7 +6,6 @@ from pitching_everything2020 import pitching_everything2020
 from exhibition_hitting import exhibition_hitting
 from exhibition_pitching import exhibition_pitching
 
-hitting_everything2020()
 exhibition_hitting()
 exhibition_pitching()
 
