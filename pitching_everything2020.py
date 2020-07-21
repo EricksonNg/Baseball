@@ -7,18 +7,19 @@ def pitching_everything2020():
         gameId = sched[i]["game_id"]
         game_date = sched[i]["game_date"]
         scoredata = statsapi.boxscore_data(gameId)
-        if sched[i]["game_type"] == "R" and sched[i]['status']=="Final" or "Game Over":
-            for ID in scoredata['playerInfo']:
-                if sched[i]['home_name'] == "San Francisco Giants":
-                    if ID in scoredata['home']['players']:
-                        if scoredata['home']['players'][ID]['stats']['pitching'] != {}:
-                            if scoredata['home']['players'][ID]['position']['abbreviation'] == 'P':
-                                h_add(game_date, scoredata, ID)
-                else:
-                    if ID in scoredata['away']['players']:
-                        if scoredata['away']['players'][ID]['stats']['pitching'] != {}:
-                            if scoredata['away']['players'][ID]['position']['abbreviation'] == 'P':
-                                a_add(game_date, scoredata, ID)
+        if sched[i]["game_type"] == "R":
+            if  sched[i]['status']=="Final" or sched[i]['status']=="Game Over":
+                for ID in scoredata['playerInfo']:
+                    if sched[i]['home_name'] == "San Francisco Giants":
+                        if ID in scoredata['home']['players']:
+                            if scoredata['home']['players'][ID]['stats']['pitching'] != {}:
+                                if scoredata['home']['players'][ID]['position']['abbreviation'] == 'P':
+                                    h_add(game_date, scoredata, ID)
+                    else:
+                        if ID in scoredata['away']['players']:
+                            if scoredata['away']['players'][ID]['stats']['pitching'] != {}:
+                                if scoredata['away']['players'][ID]['position']['abbreviation'] == 'P':
+                                    a_add(game_date, scoredata, ID)
 
 
 def h_add(game_date, scoredata, ID):
