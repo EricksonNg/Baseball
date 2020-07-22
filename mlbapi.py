@@ -25,7 +25,7 @@ def linescore(game_id):
   linescore = statsapi.linescore(game_id)
   return linescore
 
-def win_prob():
+def pbp():
   sched = statsapi.schedule(start_date='09/01/2019',team=137)
   gameId = sched[0]["game_id"]
   game_date = sched[0]["game_date"]

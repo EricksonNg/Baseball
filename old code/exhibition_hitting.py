@@ -3,6 +3,7 @@ import statsapi
 
 def exhibition_hitting():
     sched = statsapi.schedule(start_date='07/20/2020', end_date='07/21/2020', team=137)
+    print(sched)
     for i in range(len(sched)):
         gameId = sched[i]["game_id"]
         game_date = sched[i]["game_date"]

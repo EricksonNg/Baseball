@@ -2,6 +2,8 @@
   <dictionary name="Panik">
     <words>
       <w>homeruns</w>
+      <w>playername</w>
+      <w>sched</w>
       <w>scoredata</w>
       <w>yastrzemski</w>
     </words>

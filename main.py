@@ -3,11 +3,9 @@ from forms import ScheduleSearchForm, PlayerSearchForm
 import mlbapi
 from hitting_everything2020 import hitting_everything2020
 from pitching_everything2020 import pitching_everything2020
-from exhibition_hitting import exhibition_hitting
-from exhibition_pitching import exhibition_pitching
 
-exhibition_hitting()
-exhibition_pitching()
+hitting_everything2020()
+pitching_everything2020()
 
 app = Flask('app')
 app.config["SECRET_KEY"] = "1234"
@@ -87,7 +85,7 @@ def schedule():
         start_date = request.form.to_dict(flat=False)["start"][0]
         end_date = request.form.to_dict(flat=False)["end"][0]
         game_info = mlbapi.search_sched(start_date, end_date)
-        win = mlbapi.win_prob()
+        win = mlbapi.pbp()
         return render_template("schedule.html", F=form, data=game_info, win_p=win)
 
     return render_template(
