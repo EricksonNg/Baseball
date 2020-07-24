@@ -93,7 +93,7 @@ def schedule():
         F=form)
 
 
-app.run(debug=True)
+app.run(debug=True, use_reloader=False)
 
 # @app.route("/hitting_p", methods = ["GET", "POST"])
 # def hitting_p():
