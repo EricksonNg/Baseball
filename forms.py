@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired
 
 
@@ -22,3 +22,10 @@ class PlayerSearchForm(FlaskForm):
   category3 = StringField("Category 3: ")
   #search bar for stats page
   submit = SubmitField("Find") # the parameter is the label on the button
+
+class TestingForm(FlaskForm):
+  language = SelectField('Programming Language', 
+                          choices=[ ('cpp', "name1"), ('py', 'Python'), ('text', 'Plain Text')],
+                          validators = [ DataRequired()] )
+  submit = SubmitField("Submit")
+

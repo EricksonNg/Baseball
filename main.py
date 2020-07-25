@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from forms import ScheduleSearchForm, PlayerSearchForm
+from forms import ScheduleSearchForm, PlayerSearchForm, TestingForm
 import mlbapi
 from hitting_everything2020 import hitting_everything2020
 from pitching_everything2020 import pitching_everything2020
@@ -18,10 +18,13 @@ def homepage():
     return render_template(
         "index.html")
 
-@app.route("/about")
+@app.route("/about", methods=["GET", "POST"])
 def about():
-    return render_template(
-        "about.html")
+    form = TestingForm()
+    if form.validate_on_submit():
+        data = request.form.to_dict(flat=False)["language"]
+        print(data)
+    return render_template("about.html", F = form)
 
 
 @app.route("/hitting", methods=["GET", "POST"])

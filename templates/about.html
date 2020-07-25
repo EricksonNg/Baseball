@@ -5,7 +5,12 @@
   <div id = "testing">
     <h1>About</h1>
     <p>About section here</p>
-    <p>{{data}}</p>
+
+    <form method="POST" action = "">
+    {{ F.hidden_tag() }}
+    {{ F.language}} 
+    {{ F.submit  }}
+    </form>
   <div>
 {%endblock%}
 

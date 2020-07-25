@@ -9,6 +9,10 @@ body{
 #nav_bar{
   font-size: 20px;
   font-family: sans-serif;
+  position:fixed;
+  top:0;
+  width:70%;
+
 }
 
 #nav_bar ul{
@@ -17,8 +21,6 @@ body{
   padding: 0;
   overflow: hidden;
   background-color:#333; 
-  position:fixed;
-  top:0;
 }
 
 #nav_bar li a{
