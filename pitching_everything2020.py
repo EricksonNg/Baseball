@@ -1,14 +1,15 @@
 from os import path
 import statsapi
 
+
 def pitching_everything2020():
-    sched = statsapi.schedule(start_date='07/25/2020', team=137)
+    sched = statsapi.schedule(start_date='07/26/2020', team=137)
     for i in range(len(sched)):
         gameId = sched[i]["game_id"]
         game_date = sched[i]["game_date"]
         scoredata = statsapi.boxscore_data(gameId)
         if sched[i]["game_type"] == "R":
-            if  sched[i]['status']=="Final" or sched[i]['status']=="Game Over":
+            if sched[i]['status'] == "Final" or sched[i]['status'] == "Game Over":
                 for ID in scoredata['playerInfo']:
                     if sched[i]['home_name'] == "San Francisco Giants":
                         if ID in scoredata['home']['players']:
@@ -84,23 +85,23 @@ def h_add(game_date, scoredata, ID):
             content_dict = eval(content)
 
     if game_date not in content_dict[playername]['2020']['pitching']['dates']:
-        print("-----Stats not added yet for", game_date+"-----")
+        print("-----Stats not added yet for", game_date + "-----")
         with open("2020/" + str(playername) + ".txt", "w") as f:
             try:
                 content_dict[playername]['2020']['pitching']['dates'].append(game_date)
                 for i in range(len(p_categories)):
                     content_dict[playername]['2020']['pitching']['progression'][p_names[i]].append(p_categories[i])
-                    print(p_names[i], "(p) added to "+playername)
+                    print(p_names[i], "(p) added to " + playername)
                 for i in range(len(pg_categories)):
                     content_dict[playername]['2020']['pitching']['per_game'][pg_names[i]].append(pg_categories[i])
-                    print(pg_names[i], "(pg) added to "+playername)
+                    print(pg_names[i], "(pg) added to " + playername)
                 f.write(str(content_dict))
                 print("============================================")
             except Exception as e:
                 print("we got an error ", e)
                 print("Database Error ")
     else:
-        print("-----Stats already added for", game_date+"-----")
+        print("-----Stats already added for", game_date + "-----")
         print("============================================")
 
 
@@ -166,21 +167,21 @@ def a_add(game_date, scoredata, ID):
             content_dict = eval(content)
 
     if game_date not in content_dict[playername]['2020']['pitching']['dates']:
-        print("-----Stats not added yet for", game_date+"-----")
+        print("-----Stats not added yet for", game_date + "-----")
         with open("2020/" + str(playername) + ".txt", "w") as f:
             try:
                 content_dict[playername]['2020']['pitching']['dates'].append(game_date)
                 for i in range(len(p_categories)):
                     content_dict[playername]['2020']['pitching']['progression'][p_names[i]].append(p_categories[i])
-                    print(p_names[i], "(p) added to "+playername)
+                    print(p_names[i], "(p) added to " + playername)
                 for i in range(len(pg_categories)):
                     content_dict[playername]['2020']['pitching']['per_game'][pg_names[i]].append(pg_categories[i])
-                    print(pg_names[i], "(pg) added to "+playername)
+                    print(pg_names[i], "(pg) added to " + playername)
                 f.write(str(content_dict))
                 print("============================================")
             except Exception as e:
                 print("we got an error ", e)
                 print("Database Error ")
     else:
-        print("-----Stats already added for", game_date+"-----")
+        print("-----Stats already added for", game_date + "-----")
         print("============================================")
