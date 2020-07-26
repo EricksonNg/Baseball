@@ -1,11 +1,13 @@
 import statsapi
 
-sched = statsapi.schedule(start_date='07/23/2020', team=137)
+sched = statsapi.schedule(start_date='07/25/2020', team=137)
 # print(sched)
 gameId = sched[0]["game_id"]
 game_date = sched[0]["game_date"]
 game_result = sched[0]["summary"]
-# print(game['liveData']['boxscore']['teams']['away']['players'])
+game = statsapi.get('game', {'gamePk': gameId})
+print(game['liveData']['boxscore']['teams']['away']['players'])
+# print(game['liveData']['linescore'])
 # print(play['allPlays'])
 analyzed = []
 while True:

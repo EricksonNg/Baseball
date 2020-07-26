@@ -2,7 +2,7 @@ from os import path
 import statsapi
 
 def hitting_everything2020():
-    sched = statsapi.schedule(start_date='07/24/2020', team=137)
+    sched = statsapi.schedule(start_date='07/25/2020', team=137)
     for i in range(len(sched)):
         gameId = sched[i]["game_id"]
         game_date = sched[i]["game_date"]
@@ -18,7 +18,6 @@ def hitting_everything2020():
                         if ID in scoredata['away']['players']:
                             if scoredata['away']['players'][ID]['stats']['batting'] != {}:
                                 a_add(game_date, scoredata, ID)
-
 
 def h_add(game_date, scoredata, ID):
     index = scoredata['home']['players'][ID]

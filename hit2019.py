@@ -351,6 +351,7 @@ def pg2019(playername,category):
     'Left On Base':lob,
     "LOB":lob
     }
+
   name={
     'avg':'Averages',
     'average':'Averages',
