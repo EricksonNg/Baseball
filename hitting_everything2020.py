@@ -3,7 +3,7 @@ import statsapi
 
 
 def hitting_everything2020():
-    sched = statsapi.schedule(start_date='07/26/2020', team=137)
+    sched = statsapi.schedule(start_date='07/28/2020', end_date = '', team=137)
     for i in range(len(sched)):
         gameId = sched[i]["game_id"]
         game_date = sched[i]["game_date"]
@@ -90,24 +90,7 @@ def h_add(game_date, scoredata, ID):
             print("Creating File For Hitter", playername)
             with open("2020/" + str(playername) + ".txt", "w") as f:
                 f.write(
-                    "{'" + playername + "': {'ID':'" + ID + "', '2020': { 'hitting' : {{'dates': [], 'progression': "
-                                                            "{'averages': [], 'obp': [], 'slg': [], 'ops': [], "
-                                                            "'runs': [], 'doubles': [], 'triples': [], "
-                                                            "'homeruns': [], 'strikeouts': [], 'walks': [], "
-                                                            "'hits': [], 'ab': [], 'sb': [], 'rbi': [], "
-                                                            "'lob': []}, 'per_game': {'ab': [], 'strikeouts': [], "
-                                                            "'hits': [], 'walks': [], 'runs': [], 'rbi': [], "
-                                                            "'sb': [], 'lob': [], 'doubles': [], 'triples': [], "
-                                                            "'homeruns': []}}}, 'pitching' : {'dates': [], "
-                                                            "'progression': {'era': [], 'innings': [], "
-                                                            "'hits': [], 'runs': [], 'earned_runs': [], "
-                                                            "'walks': [], 'strikeouts': [], 'homeruns': [], "
-                                                            "'doubles': [], 'triples': [], 'ab': [], 'obp': [], "
-                                                            "'wins': [], 'losses': [], 'holds': [], "
-                                                            "'blown_saves': []}, 'per_game': {'innings': [], "
-                                                            "'hits': [], 'runs': [], 'earned_runs': [], "
-                                                            "'walks': [], 'strikeouts': [], 'homeruns': [], "
-                                                            "'pitches': [], 'strikes': []}}}}}")
+                    "{'" + playername + "': {'ID':'" + ID + "', '2020': {'hitting': {'dates': [], 'progression': {'averages': [], 'obp': [], 'slg': [], 'ops': [], 'runs': [], 'doubles': [], 'triples': [], 'homeruns': [], 'strikeouts': [], 'walks': [], 'hits': [], 'ab': [], 'sb': [], 'rbi': [], 'lob': []}, 'per_game': {'ab': [], 'strikeouts': [], 'hits': [], 'walks': [], 'runs': 1], 'rbi': [0], 'sb': [], 'lob': [], 'doubles': [], 'triples': [], 'homeruns': []}}, 'pitching': {'dates': [], 'progression': {'era': [], 'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'doubles': [], 'triples': [], 'ab': [], 'obp': [], 'wins': [], 'losses': [], 'holds': [], 'blown_saves': []}, 'per_game': {'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'pitches': [], 'strikes': []}}}}}")
             with open("2020/" + str(playername) + ".txt", "r") as FILE:
                 content = FILE.read()
                 content_dict = eval(content)
@@ -206,26 +189,6 @@ def a_add(game_date, scoredata, ID):
             with open("2020/" + str(playername) + ".txt", "r") as FILE:
                 content = FILE.read()
                 content_dict = eval(content)
-
-    if game_date not in content_dict[playername]['2020']['hitting']['dates']:
-        print("-----Stats not added yet for", game_date + "-----")
-        with open("2020/" + str(playername) + ".txt", "w") as f:
-            try:
-                content_dict[playername]['2020']['hitting']['dates'].append(game_date)
-                for i in range(len(p_categories)):
-                    content_dict[playername]['2020']['hitting']['progression'][p_names[i]].append(p_categories[i])
-                    print(p_names[i], "(p) added to " + playername)
-                for i in range(len(pg_categories)):
-                    content_dict[playername]['2020']['hitting']['per_game'][pg_names[i]].append(pg_categories[i])
-                    print(pg_names[i], "(pg) added to " + playername)
-                f.write(str(content_dict))
-                print("============================================")
-            except Exception as e:
-                print("we got an error ", e)
-                print("Database Error ")
-    else:
-        print("-----Stats already added for", game_date + "-----")
-        print("============================================")
 
     if game_date not in content_dict[playername]['2020']['hitting']['dates']:
         print("-----Stats not added yet for", game_date + "-----")
