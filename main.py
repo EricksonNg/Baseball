@@ -33,13 +33,14 @@ def hitting():
     form = PlayerSearchForm()
     if form.validate_on_submit():
         print("POST REQUEST COMPLETED!")
+        year = request.form.to_dict(flat=False)["year"][0]
         types = request.form.to_dict(flat=False)["types"][0]
         playername = request.form.to_dict(flat=False)["name"][0]
         category = request.form.to_dict(flat=False)["category"][0]
         if types == 'p' or types == 'progressive' or types == 'Progressive':
-            a, b, c = p2019(playername, category)
+            a, b, c = p2019(playername, category, year)
         if types == 'pg' or types == 'per game' or types == 'Per game' or types == 'Per Game':
-            a, b, c = pg2019(playername, category)
+            a, b, c = pg2019(playername, category, year)
 
         return render_template(
             "hitting.html", F=form,
@@ -60,13 +61,14 @@ def pitching():
     form = PlayerSearchForm()
     if form.validate_on_submit():
         print("POST REQUEST COMPLETED!")
+        year = request.form.to_dict(flat=False)["year"][0]
         types = request.form.to_dict(flat=False)["types"][0]
         playername = request.form.to_dict(flat=False)["name"][0]
         category = request.form.to_dict(flat=False)["category"][0]
         if types == 'p' or types == 'progresive' or types == 'Progressive':
-            a, b, c = p2019(playername, category)
+            a, b, c = p2019(playername, category, year)
         if types == 'pg' or types == 'per game' or types == 'Per game' or types == 'Per Game':
-            a, b, c = pg2019(playername, category)
+            a, b, c = pg2019(playername, category, year)
 
         return render_template(
             "pitching.html", F=form,

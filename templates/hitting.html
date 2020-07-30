@@ -1,27 +1,28 @@
 {% extends "main.html"  %}
 
-{%  block body  %} 
-  
-  <form method="POST" action = "">
+{%  block body  %}
+
+<form method="POST" action="">
     {{ F.hidden_tag() }}
+    {{F.year.label}} {{F.year(placeholder = "Year")}}
     {{F.types.label}} {{F.types(placeholder = "Progressive or Per Game")}}
     {{F.name.label}} {{F.name(placeholder = "Player Full Name")}}
     {{F.category.label}} {{F.category(placeholder = "Catergory")}}
     <!-- {{F.category2.label}} {{F.category2(placeholder = "Catergory")}}
     {{F.category3.label}} {{F.category3(placeholder = "Catergory")}} -->
     {{F.submit}}
-  </form>
+</form>
 
-  {% if player_category and player_date %}
+{% if player_category and player_date %}
 
-      <!-- cancas element -->
-      <div id = "chart"> 
-      <canvas id="myChart" width="750" height="500"></canvas>
-      <canvas id="myChart2" width="750" height="500"></canvas>
-      <canvas id="myChart3" width="750" height="500"></canvas>
-      </div>
-      <!-- Js code -->
-      <script>
+<!-- cancas element -->
+<div id="chart">
+    <canvas id="myChart" width="750" height="500"></canvas>
+    <canvas id="myChart2" width="750" height="500"></canvas>
+    <canvas id="myChart3" width="750" height="500"></canvas>
+</div>
+<!-- Js code -->
+<script>
       Chart.defaults.global.responsive = false;
 
       graph();
@@ -65,9 +66,10 @@
       
       };
 
-    </script>
 
-  {% endif %}
+</script>
+
+{% endif %}
 
 {% endblock %}
 

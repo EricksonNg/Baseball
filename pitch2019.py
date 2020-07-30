@@ -1,10 +1,10 @@
-def p2019(playername, category):
-    with open("2019/" + playername + ".txt", "r") as FILE:
+def p2019(playername, category, year):
+    with open(year+"/" + playername + ".txt", "r") as FILE:
         content = FILE.read()
         content_dict = eval(content)
-        index = content_dict[playername]['2019']['pitching']['progression']
+        index = content_dict[playername][year]['pitching']['progression']
         ID = content_dict[playername]["ID"]
-        dates = content_dict[playername]['2019']['pitching']['dates']
+        dates = content_dict[playername][year]['pitching']['dates']
         era = index['era']
         ip = index['innings']
         h = index['hits']
@@ -264,13 +264,13 @@ def p2019(playername, category):
     return dates, stat[category], name[category]
 
 
-def pg2019(playername, category):
-    with open("2019/" + playername + ".txt", "r") as FILE:
+def pg2019(playername, category, year):
+    with open(year+"/" + playername + ".txt", "r") as FILE:
         content = FILE.read()
         content_dict = eval(content)
-        index = content_dict[playername]['2019']['pitching']['per_game']
+        index = content_dict[playername][year]['pitching']['per_game']
         ID = content_dict[playername]["ID"]
-        dates = content_dict[playername]['2019']['pitching']['dates']
+        dates = content_dict[playername][year]['pitching']['dates']
         ip = index['innings']
         h = index['hits']
         r = index['runs']

@@ -3,7 +3,7 @@ import statsapi
 
 
 def hitting_everything2020():
-    sched = statsapi.schedule(start_date='07/28/2020', end_date = '', team=137)
+    sched = statsapi.schedule(start_date='07/30/2020', end_date = '', team=137)
     for i in range(len(sched)):
         gameId = sched[i]["game_id"]
         game_date = sched[i]["game_date"]
@@ -90,7 +90,7 @@ def h_add(game_date, scoredata, ID):
             print("Creating File For Hitter", playername)
             with open("2020/" + str(playername) + ".txt", "w") as f:
                 f.write(
-                    "{'" + playername + "': {'ID':'" + ID + "', '2020': {'hitting': {'dates': [], 'progression': {'averages': [], 'obp': [], 'slg': [], 'ops': [], 'runs': [], 'doubles': [], 'triples': [], 'homeruns': [], 'strikeouts': [], 'walks': [], 'hits': [], 'ab': [], 'sb': [], 'rbi': [], 'lob': []}, 'per_game': {'ab': [], 'strikeouts': [], 'hits': [], 'walks': [], 'runs': 1], 'rbi': [0], 'sb': [], 'lob': [], 'doubles': [], 'triples': [], 'homeruns': []}}, 'pitching': {'dates': [], 'progression': {'era': [], 'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'doubles': [], 'triples': [], 'ab': [], 'obp': [], 'wins': [], 'losses': [], 'holds': [], 'blown_saves': []}, 'per_game': {'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'pitches': [], 'strikes': []}}}}}")
+                    "{'" + playername + "': {'ID':'" + ID + "', '2020': { 'hitting' : {'dates': [], 'progression': {'averages': [], 'obp': [], 'slg': [], 'ops': [], 'runs': [], 'doubles': [], 'triples': [], 'homeruns': [], 'strikeouts': [], 'walks': [], 'hits': [], 'ab': [], 'sb': [], 'rbi': [], 'lob': []}, 'per_game': {'ab': [], 'strikeouts': [], 'hits': [], 'walks': [], 'runs': [], 'rbi': [], 'sb': [], 'lob': [], 'doubles': [], 'triples': [], 'homeruns': []}}, 'pitching': {'dates': [], 'progression': {'era': [], 'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'doubles': [], 'triples': [], 'ab': [], 'obp': [], 'wins': [], 'losses': [], 'holds': [], 'blown_saves': []}, 'per_game': {'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'pitches': [], 'strikes': []}}}}}")
             with open("2020/" + str(playername) + ".txt", "r") as FILE:
                 content = FILE.read()
                 content_dict = eval(content)
