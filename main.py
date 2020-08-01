@@ -22,20 +22,23 @@ def homepage():
 def about():
     form = TestingForm()
     if form.validate_on_submit():
-        data = request.form.to_dict(flat=False)["language"]
+        data = request.form.to_dict(flat=False)["language"][0]
         print(data)
     return render_template("about.html", F = form)
 
-
 @app.route("/hitting", methods=["GET", "POST"])
 def hitting():
-    from hit2019 import p2019, pg2019
+    from hit import p2019, pg2019
     form = PlayerSearchForm()
     if form.validate_on_submit():
         print("POST REQUEST COMPLETED!")
         year = request.form.to_dict(flat=False)["year"][0]
         types = request.form.to_dict(flat=False)["types"][0]
         playername = request.form.to_dict(flat=False)["name"][0]
+        # if types == 'Progressive':
+        #     category = request.form.to_dict(flat=False)["h_p_category"][0]
+        # if types == 'Per Game':
+        #     category = request.form.to_dict(flat=False)["h_pg_category"][0]
         category = request.form.to_dict(flat=False)["category"][0]
         if types == 'p' or types == 'progressive' or types == 'Progressive':
             a, b, c = p2019(playername, category, year)
@@ -56,7 +59,7 @@ def hitting():
 
 @app.route("/pitching", methods=["GET", "POST"])
 def pitching():
-    from pitch2019 import p2019, pg2019
+    from pitch import p2019, pg2019
 
     form = PlayerSearchForm()
     if form.validate_on_submit():
