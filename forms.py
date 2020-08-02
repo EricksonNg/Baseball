@@ -19,10 +19,10 @@ class PlayerSearchForm(FlaskForm):
     year = SelectField("Year:", choices = [('2020','2020'),('2019','2019')], validators=[DataRequired()])
     types = SelectField("Type:", choices = [('Progressive','Progressive'),('Per Game','Per Game')], validators=[DataRequired()])
     name = StringField("N:", validators=[DataRequired()])
-    h_p_category = SelectField("Type:", choices = selections.h_p_categories(), validators=[DataRequired()])
-    h_pg_category = SelectField("Type:", choices = selections.h_pg_categories(), validators=[DataRequired()])
-    p_p_category = SelectField("Type:", choices = selections.p_p_categories(), validators=[DataRequired()])
-    p_pg_category = SelectField("Type:", choices = selections.p_pg_categories(), validators=[DataRequired()])
+    # h_p_category = SelectField("Type:", choices = selections.h_p_categories(), validators=[DataRequired()])
+    # h_pg_category = SelectField("Type:", choices = selections.h_pg_categories(), validators=[DataRequired()])
+    # p_p_category = SelectField("Type:", choices = selections.p_p_categories(), validators=[DataRequired()])
+    # p_pg_category = SelectField("Type:", choices = selections.p_pg_categories(), validators=[DataRequired()])
     category = StringField("C:", validators=[DataRequired()])
     # search bar for stats page
     submit = SubmitField("Find")  # the parameter is the label on the button
