@@ -115,6 +115,34 @@ def h_add(game_date, scoredata, ID):
         print("-----Stats already added for", game_date + "-----")
         print("============================================")
 
+    if path.exists("2020/hitters.txt"):
+        with open("2020/hitters.txt", "r") as FILE:
+            content = FILE.read()
+            try:
+                content_dict = eval(content)
+            except Exception as e:
+                print("we got an error ", e)
+                print("Database Error ")
+    else:
+        with open("2020/hitters.txt", "w") as FILE:
+            FILE.write("{'players':[]}")
+        with open("2020/hitters.txt", "r") as FILE:
+            content = FILE.read()
+            try:
+                content_dict = eval(content)
+            except Exception as e:
+                print("we got an error ", e)
+                print("Database Error ")
+
+    if playername not in content_dict['players']:
+        with open("2020/hitters.txt", "w") as f:
+            try:
+                content_dict['players'].append(playername)
+                content_dict['players'].sort()
+                f.write(str(content_dict))
+            except Exception as e:
+                print("we got an error ", e)
+                print("Database Error ")
 
 def a_add(game_date, scoredata, ID):
     index = scoredata['away']['players'][ID]
@@ -209,3 +237,32 @@ def a_add(game_date, scoredata, ID):
     else:
         print("-----Stats already added for", game_date + "-----")
         print("============================================")
+
+    if path.exists("2020/hitters.txt"):
+        with open("2020/hitters.txt", "r") as FILE:
+            content = FILE.read()
+            try:
+                content_dict = eval(content)
+            except Exception as e:
+                print("we got an error ", e)
+                print("Database Error ")
+    else:
+        with open("2020/hitters.txt", "w") as FILE:
+            FILE.write("{'players':[]}")
+        with open("2020/hitters.txt", "r") as FILE:
+            content = FILE.read()
+            try:
+                content_dict = eval(content)
+            except Exception as e:
+                print("we got an error ", e)
+                print("Database Error ")
+
+    if playername not in content_dict['players']:
+        with open("2020/hitters.txt", "w") as f:
+            try:
+                content_dict['players'].append(playername)
+                content_dict['players'].sort()
+                f.write(str(content_dict))
+            except Exception as e:
+                print("we got an error ", e)
+                print("Database Error ")

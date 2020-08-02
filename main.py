@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from forms import ScheduleSearchForm, PlayerSearchForm, TestingForm
+from forms import ScheduleSearchForm, TestingForm, HittingForm, PitchingForm
 import mlbapi
 from hitting_everything2020 import hitting_everything2020
 from pitching_everything2020 import pitching_everything2020
@@ -29,12 +29,12 @@ def about():
 @app.route("/hitting", methods=["GET", "POST"])
 def hitting():
     from hit import p2019, pg2019
-    form = PlayerSearchForm()
+    form = HittingForm()
     if form.validate_on_submit():
         print("POST REQUEST COMPLETED!")
         year = request.form.to_dict(flat=False)["year"][0]
         types = request.form.to_dict(flat=False)["types"][0]
-        playername = request.form.to_dict(flat=False)["name"][0]
+        playername = request.form.to_dict(flat=False)["player"][0]
         # if types == 'Progressive':
         #     category = request.form.to_dict(flat=False)["h_p_category"][0]
         # if types == 'Per Game':
@@ -61,12 +61,12 @@ def hitting():
 def pitching():
     from pitch import p2019, pg2019
 
-    form = PlayerSearchForm()
+    form = PitchingForm()
     if form.validate_on_submit():
         print("POST REQUEST COMPLETED!")
         year = request.form.to_dict(flat=False)["year"][0]
         types = request.form.to_dict(flat=False)["types"][0]
-        playername = request.form.to_dict(flat=False)["name"][0]
+        playername = request.form.to_dict(flat=False)["player"][0]
         category = request.form.to_dict(flat=False)["category"][0]
         if types == 'p' or types == 'progresive' or types == 'Progressive':
             a, b, c = p2019(playername, category, year)

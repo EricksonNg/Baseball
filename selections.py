@@ -1,6 +1,19 @@
-def names():
-    players = ['Mike Yastrzemski']
-    data = []
+def hitter_names():
+    with open("2020/hitters.txt", "r") as FILE:
+        content = FILE.read()
+        content_dict = eval(content)
+    players = content_dict['players']
+    data = [('None', 'Select A Player')]
+    for i in range(len(players)):
+        data.append((players[i], players[i]))
+    return data
+
+def pitcher_names():
+    with open("2020/pitchers.txt", "r") as FILE:
+        content = FILE.read()
+        content_dict = eval(content)
+    players = content_dict['players']
+    data = [('None', 'Select A Player')]
     for i in range(len(players)):
         data.append((players[i], players[i]))
     return data

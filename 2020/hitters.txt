@@ -1,0 +1,1 @@
+{'players': ['Alex Dickerson', 'Austin Slater', 'Brandon Belt', 'Brandon Crawford', 'Chadwick Tromp', 'Darin Ruf', 'Donovan Solano', 'Evan Longoria', 'Hunter Pence', 'Jaylin Davis', 'Joe McCarthy', 'Mauricio Dubon', 'Mike Yastrzemski', 'Pablo Sandoval', 'Rob Brantly', 'Steven Duggar', 'Tyler Heineman', 'Wilmer Flores']}
