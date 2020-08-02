@@ -1,15 +1,36 @@
 from os import path
 import statsapi
-
+import datetime
 
 def hitting_everything2020():
-    sched = statsapi.schedule(start_date='08/02/2020', end_date = '', team=137)
+    today = datetime.date.today()
+    yesterday = today - datetime.timedelta(days=1)
+    tomorrow = today + datetime.timedelta(days=1)
+    sched = statsapi.schedule(start_date= yesterday, end_date = tomorrow, team=137)
     for i in range(len(sched)):
         gameId = sched[i]["game_id"]
         game_date = sched[i]["game_date"]
         scoredata = statsapi.boxscore_data(gameId)
-        if sched[i]["game_type"] == "R":
-            if sched[i]['status'] == "Final" or sched[i]['status'] == "Game Over":
+        if path.exists("2020/h_dates.txt"):
+            with open("2020/h_dates.txt", "r") as FILE:
+                content = FILE.read()
+                try:
+                    content_dict = eval(content)
+                except Exception as e:
+                    print("we got an error ", e)
+                    print("Database Error ")
+        else:
+            with open("2020/h_dates.txt", "w") as FILE:
+                FILE.write("{'dates':[]}")
+            with open("2020/h_dates.txt", "r") as FILE:
+                content = FILE.read()
+                try:
+                    content_dict = eval(content)
+                except Exception as e:
+                    print("we got an error ", e)
+                    print("Database Error ")
+        if game_date not in content_dict['dates'] and (sched[i]['status'] == "Final" or sched[i]['status'] == "Game Over"):
+            if sched[i]["game_type"] == "R":
                 for ID in scoredata['playerInfo']:
                     if sched[i]['home_name'] == "San Francisco Giants":
                         if ID in scoredata['home']['players']:
@@ -19,7 +40,13 @@ def hitting_everything2020():
                         if ID in scoredata['away']['players']:
                             if scoredata['away']['players'][ID]['stats']['batting'] != {}:
                                 a_add(game_date, scoredata, ID)
-
+                with open("2020/h_dates.txt", "w") as f:
+                    try:
+                        content_dict['dates'].append(game_date)
+                        f.write(str(content_dict))
+                    except Exception as e:
+                        print("we got an error ", e)
+                        print("Database Error ")
 
 def h_add(game_date, scoredata, ID):
     index = scoredata['home']['players'][ID]
