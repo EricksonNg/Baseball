@@ -25,12 +25,13 @@ class HittingForm(FlaskForm):
     year = SelectField("Y:", choices=[('2020', '2020'), ('2019', '2019')], validators=[DataRequired()])
     types = SelectField("T:", choices=[('Progressive', 'Progressive'), ('Per Game', 'Per Game')], validators=[DataRequired()])
     category = StringField("C:", validators=[DataRequired()])
+    # category = SelectField("C:", choices=[('Average', 'Average'), ('On Base Percentage', 'On Base Percentage'), ('Slugging', 'Slugging'), ('On Base Plus Slugging', 'On Base Plus Slugging'), ('Runs', 'Runs'), ('Doubles', 'Doubles'), ('Triples', 'Triples'), ('Home Runs', 'Home Runs'), ('Strikeouts', 'Strikeouts'), ('Walks', 'Walks'), ('Hits', 'Hits'), ('At Bats', 'At Bats'), ('Stolen Bases', 'Stolen Bases'), ('Stolen Bases', 'Stolen Bases'), ('Runs Batted In', 'Runs Batted In'), ('Left On Base', 'Left On Base'), ('At Bats', 'At Bats'), ('Strikeouts', 'Strikeouts'), ('Hits', 'Hits'), ('Walks', 'Walks'), ('Runs', 'Runs'), ('Runs Batted In', 'Runs Batted In'), ('Stolen Bases', 'Stolen Bases'), ('Left On Base', 'Left On Base'), ('Doubles', 'Doubles'), ('Triples', 'Triples'), ('Home Runs', 'Home Runs')], validators=[DataRequired()])
     # h_p_category = SelectField("Type:", choices = selections.h_p_categories(), validators=[DataRequired()])
     # h_pg_category = SelectField("Type:", choices = selections.h_pg_categories(), validators=[DataRequired()])
     player = SelectField("P:",
                          choices=hitter_names(),
                          validators=[DataRequired()])
-    submit = SubmitField("Go")
+    submit = SubmitField("->")
 
 class PitchingForm(FlaskForm):
     year = SelectField("Y:", choices=[('2020', '2020'), ('2019', '2019')], validators=[DataRequired()])
@@ -41,4 +42,4 @@ class PitchingForm(FlaskForm):
     player = SelectField("P:",
                          choices=pitcher_names(),
                          validators=[DataRequired()])
-    submit = SubmitField("Go")
+    submit = SubmitField("->")
