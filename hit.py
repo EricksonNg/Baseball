@@ -50,6 +50,7 @@ def p2019(playername, category, year):
     'ops':ops,
     'on base plus slugging':ops,
     'On base plus slugging':ops,
+    'On Base Plus Slugging':ops,
     'OPS':ops,
 
     'r':r,
@@ -80,9 +81,11 @@ def p2019(playername, category, year):
     'home run':hr,
     'home runs':hr,
     'Homer':hr,
-    'Hoemrs':hr,
+    'Homers':hr,
     'Home runs':hr,
     'Home run':hr,
+    'Home Run':hr,
+    'Home Runs': hr,
 
     'k':k,
     'strikeouts':k,
@@ -162,6 +165,7 @@ def p2019(playername, category, year):
     'ops':'On Base Plus Slugging Percentage',
     'on base plus slugging':'On Base Plus Slugging Percentage',
     'On base plus slugging':'On Base Plus Slugging Percentage',
+    'On Base Plus Slugging': 'On Base Plus Slugging Percentage',
     'OPS':'On Base Plus Slugging Percentage',
 
     'r':'Runs',
@@ -195,6 +199,8 @@ def p2019(playername, category, year):
     'Homers':'Home Runs',
     'Home runs':'Home Runs',
     'Home run':'Home Runs',
+    'Home Run':'Home Runs',
+    'Home Runs':'Home Runs',
 
     'k':'Strikeouts',
     'strikeouts':'Strikeouts',
