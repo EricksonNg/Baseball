@@ -28,16 +28,19 @@ def about():
     return render_template("about.html", F = form)
 
 hit = {
-    "Progressive": selections.h_p_categories,
-    "Per Game": selections.h_pg_categories
-}
+        "P": selections.h_p_categories,
+        "PG": selections.h_pg_categories,
+        "Progressive": selections.h_p_categories,
+        "Per Game": selections.h_pg_categories
+    }
 
 @app.route("/hitting", methods=["GET", "POST"])
 def hitting():
+    global form, selected, hit
     from hit import p2019, pg2019
 
-    selected = "Progressive"
     form = HittingForm()
+    selected = "Progressive"
     form.category.choices= hit[selected]()
 
     if form.validate_on_submit():
