@@ -19,7 +19,7 @@ def pitcher_names():
     return data
 
 def h_p_categories():
-    categories = ['Average', 'On Base Percentage', 'Slugging', 'On Base Plus Slugging', 'Runs', 'Doubles', 'Triples', 'Home Runs', 'Strikeouts', 'Walks', 'Hits', 'At Bats', 'Stolen Bases', 'Stolen Bases', 'Runs Batted In', 'Left On Base']
+    categories = ['Average', 'On Base Percentage', 'Slugging', 'On Base Plus Slugging', 'Runs', 'Doubles', 'Triples', 'Home Runs', 'Strikeouts', 'Walks', 'Hits', 'At Bats', 'Stolen Bases', 'Runs Batted In', 'Left On Base']
     data = []
     for i in range(len(categories)):
         data.append((categories[i],categories[i]))

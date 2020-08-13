@@ -11,6 +11,8 @@
     {{F.submit}}
 </form>
 
+<script src="{{url_for('static', filename='script.js')}}"></script>
+
 {% if player_category and player_date %}
 
 <!-- cancas element -->
@@ -24,10 +26,10 @@
       Chart.defaults.global.responsive = false;
 
       graph();
-      
+
       function graph(){
       var ctx = document.getElementById('myChart').getContext('2d');
-      var myChart = new Chart(ctx, 
+      var myChart = new Chart(ctx,
         {
           type: 'line',
           data: {
@@ -44,7 +46,7 @@
                   borderWidth: 1,
                   lineTension: 0
               }]
-              
+
           },
           options: {
                scales: {
@@ -63,7 +65,7 @@
                 },
           }
       })
-      
+
       };
 
 

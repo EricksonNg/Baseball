@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from forms import ScheduleSearchForm, TestingForm, HittingForm, PitchingForm
 import mlbapi
 from hitting_everything2020 import hitting_everything2020
 from pitching_everything2020 import pitching_everything2020
+import selections
 
 hitting_everything2020()
 pitching_everything2020()
@@ -26,23 +27,28 @@ def about():
         print(data)
     return render_template("about.html", F = form)
 
+hit = {
+    "Progressive": selections.h_p_categories,
+    "Per Game": selections.h_pg_categories
+}
+
 @app.route("/hitting", methods=["GET", "POST"])
 def hitting():
     from hit import p2019, pg2019
+
+    selected = "Progressive"
     form = HittingForm()
+    form.category.choices= hit[selected]()
+
     if form.validate_on_submit():
         print("POST REQUEST COMPLETED!")
         year = request.form.to_dict(flat=False)["year"][0]
         types = request.form.to_dict(flat=False)["types"][0]
         playername = request.form.to_dict(flat=False)["player"][0]
-        # if types == 'Progressive':
-        #     category = request.form.to_dict(flat=False)["h_p_category"][0]
-        # if types == 'Per Game':
-        #     category = request.form.to_dict(flat=False)["h_pg_category"][0]
         category = request.form.to_dict(flat=False)["category"][0]
-        if types == 'p' or types == 'progressive' or types == 'Progressive':
+        if types == 'P' or types == 'progressive' or types == 'Progressive':
             a, b, c = p2019(playername, category, year)
-        if types == 'pg' or types == 'per game' or types == 'Per game' or types == 'Per Game':
+        if types == 'PG' or types == 'per game' or types == 'Per game' or types == 'Per Game':
             a, b, c = pg2019(playername, category, year)
 
         return render_template(
@@ -56,6 +62,20 @@ def hitting():
         "hitting.html",
         F=form)
 
+#This route will return data back to the website w/e the user changes the select field
+@app.route("/getdata/<types>")
+def resend_selectionForm_data(types):
+  print("The selected user from form:", types)
+
+  global form,selected
+  #user is the name of student sent back by fetch in javascript
+  if types in hit:
+    selected = types
+
+    #the jsonify function is part of the Flask library and it needs to be imported
+    return (jsonify( {"data": hit[types]()} ))
+  else:
+    return (jsonify({}) )
 
 @app.route("/pitching", methods=["GET", "POST"])
 def pitching():
@@ -84,7 +104,6 @@ def pitching():
         "pitching.html",
         F=form)
 
-
 @app.route("/schedule", methods=["GET", "POST"])
 def schedule():
     form = ScheduleSearchForm()
@@ -100,93 +119,5 @@ def schedule():
         "schedule.html",
         F=form)
 
-
 app.run(debug=True, use_reloader=False)
 
-# @app.route("/hitting_p", methods = ["GET", "POST"])
-# def hitting_p():
-#   from hit2019 import p2019
-
-#   form = PlayerSearchForm()
-#   if form.validate_on_submit():
-#     print("POST REQUEST COMPLETED!")
-#     playername = request.form.to_dict(flat = False)["name"][0]
-#     category = request.form.to_dict(flat=False)["category"][0]
-#     a,b,c = p2019(playername, category)
-
-#     return render_template(
-#       "hitting_p.html", F = form, 
-#       player_date = a, 
-#       player_category = b, 
-#       category = c,
-#       player_name = playername)
-
-#   return render_template(
-#     "hitting_p.html", 
-#     F = form)
-
-# @app.route("/hitting_pg", methods = ["GET", "POST"])
-# def hitting_pg():
-#   from hit2019 import pg2019
-
-#   form = PlayerSearchForm()
-#   if form.validate_on_submit():
-#     print("POST REQUEST COMPLETED!")
-#     playername = request.form.to_dict(flat = False)["name"][0]
-#     category = request.form.to_dict(flat=False)["category"][0]
-#     a,b,c = pg2019(playername, category)
-
-#     return render_template(
-#       "hitting_pg.html", F = form, 
-#       player_date = a, 
-#       player_category = b, 
-#       category = c,
-#       player_name = playername)
-
-#   return render_template(
-#     "hitting_pg.html", 
-#     F = form)
-
-# @app.route("/pitching_p", methods = ["GET", "POST"])
-# def pitching_p():
-#   from pitch2019 import p2019
-
-#   form = PlayerSearchForm()
-#   if form.validate_on_submit():
-#     print("POST REQUEST COMPLETED!")
-#     playername = request.form.to_dict(flat = False)["name"][0]
-#     category = request.form.to_dict(flat=False)["category"][0]
-#     a,b,c = p2019(playername, category)
-
-#     return render_template(
-#       "pitching_p.html", F = form, 
-#       player_date = a, 
-#       player_category = b, 
-#       category = c,
-#       player_name = playername)
-
-#   return render_template(
-#     "pitching_p.html", 
-#     F = form)
-
-# @app.route("/pitching_pg", methods = ["GET", "POST"])
-# def pitching_pg():
-#   from pitch2019 import pg2019
-
-#   form = PlayerSearchForm()
-#   if form.validate_on_submit():
-#     print("POST REQUEST COMPLETED!")
-#     playername = request.form.to_dict(flat = False)["name"][0]
-#     category = request.form.to_dict(flat=False)["category"][0]
-#     a,b,c = pg2019(playername, category)
-
-#     return render_template(
-#       "pitching_pg.html", F = form, 
-#       player_date = a, 
-#       player_category = b, 
-#       category = c,
-#       player_name = playername)
-
-#   return render_template(
-#     "pitching_pg.html", 
-#     F = form)
