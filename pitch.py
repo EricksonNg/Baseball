@@ -52,6 +52,7 @@ def p2019(playername, category, year):
         'ER': er,
         'Earned run': er,
         'Earned runs': er,
+        'Earned Runs': er,
 
         'bb': bb,
         'base on ball': bb,
@@ -111,7 +112,7 @@ def p2019(playername, category, year):
         'Obp': obp,
         'On base percentage': obp,
         'On base percentages': obp,
-        'On Base Percenage': obp,
+        'On Base Percentage': obp,
         'On Base Percentages': obp,
         'OBP': obp,
 
@@ -171,6 +172,7 @@ def p2019(playername, category, year):
         'ER': 'Earned Runs',
         'Earned run': 'Earned Runs',
         'Earned runs': 'Earned Runs',
+        'Earned Runs': 'Earned Runs',
 
         'bb': 'Walks',
         'base on ball': 'Walks',
@@ -230,7 +232,7 @@ def p2019(playername, category, year):
         'Obp': 'On Base Percentage',
         'On base percentage': 'On Base Percentage',
         'On base percentages': 'On Base Percentage',
-        'On Base Percenage': 'On Base Percentage',
+        'On Base Percentage': 'On Base Percentage',
         'On Base Percentages': 'On Base Percentage',
         'OBP': 'On Base Percentage',
 
@@ -306,6 +308,8 @@ def pg2019(playername, category, year):
         'ER': er,
         'Earned run': er,
         'Earned runs': er,
+        'Earned Run': er,
+        'Earned Runs': er,
 
         'bb': bb,
         'base on ball': bb,
@@ -379,6 +383,8 @@ def pg2019(playername, category, year):
         'ER': 'Earned Runs',
         'Earned run': 'Earned Runs',
         'Earned runs': 'Earned Runs',
+        'Earned Run': 'Earned Runs',
+        'Earned Runs': 'Earned Runs',
 
         'bb': 'Walks',
         'base on ball': 'Walks',

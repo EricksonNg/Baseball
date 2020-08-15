@@ -20,7 +20,7 @@ body{
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color:#333; 
+  background-color:black;
 }
 
 #nav_bar li a{
@@ -35,13 +35,13 @@ body{
 } 
 
 #nav_bar li a:hover:not(.active){
-  background-color:lightgreen;
-  color:#333;
+  background-color:tomato;
+  color:black;
 } 
 
 #nav_bar li a.active{
   border-right:none;
-  color:whitesmoke;
+  color:tomato;
   float:left;
   padding-left:10%;
   font-size:25px;

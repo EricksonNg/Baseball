@@ -28,6 +28,7 @@ class HittingForm(FlaskForm):
 class PitchingForm(FlaskForm):
     year = SelectField("Y:", choices=[('2020', '2020'), ('2019', '2019')], validators=[DataRequired()])
     types = SelectField("T:", choices=[('Progressive', 'Progressive'), ('Per Game', 'Per Game')], validators=[DataRequired()])
-    category = StringField("C:", validators=[DataRequired()])
+    category = SelectField("C:", choices=[], validators=[DataRequired()])
+    # category = StringField("C:", validators=[DataRequired()])
     player = SelectField("P:", choices=pitcher_names(), validators=[DataRequired()])
     submit = SubmitField("->")

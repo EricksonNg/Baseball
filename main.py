@@ -11,6 +11,7 @@ pitching_everything2020()
 app = Flask('app')
 app.config["SECRET_KEY"] = "1234"
 
+
 # Python decorator
 @app.route('/')
 @app.route('/home')
@@ -19,29 +20,43 @@ def homepage():
     return render_template(
         "index.html")
 
+
 @app.route("/about", methods=["GET", "POST"])
 def about():
     form = TestingForm()
     if form.validate_on_submit():
         data = request.form.to_dict(flat=False)["language"][0]
         print(data)
-    return render_template("about.html", F = form)
+    return render_template("about.html", F=form)
+
 
 hit = {
-        "P": selections.h_p_categories,
-        "PG": selections.h_pg_categories,
-        "Progressive": selections.h_p_categories,
-        "Per Game": selections.h_pg_categories
-    }
+    "P": selections.h_p_categories,
+    "PG": selections.h_pg_categories,
+    "Progressive": selections.h_p_categories,
+    "Per Game": selections.h_pg_categories
+}
+
+pitch = {
+    "P": selections.p_p_categories,
+    "PG": selections.p_pg_categories,
+    "Progressive": selections.p_p_categories,
+    "Per Game": selections.p_pg_categories
+}
+
+selected = "Progressive"  # Do not put inside the the function where "selected" is called (it will cause the selectfield to go back to the choices for "Progressive" after submitting)
+page = "hitting"  # giving page a default value (doesn't really affect anything)
+
 
 @app.route("/hitting", methods=["GET", "POST"])
 def hitting():
-    global form, selected, hit
     from hit import p2019, pg2019
+    global page, selected
 
+    # print(selected)
+    page = "hitting"  # helps differeniate hitting and pitching category choices in resend_selectionForm_data function
     form = HittingForm()
-    selected = "Progressive"
-    form.category.choices= hit[selected]()
+    form.category.choices = hit[selected]()
 
     if form.validate_on_submit():
         print("POST REQUEST COMPLETED!")
@@ -65,35 +80,26 @@ def hitting():
         "hitting.html",
         F=form)
 
-#This route will return data back to the website w/e the user changes the select field
-@app.route("/getdata/<types>")
-def resend_selectionForm_data(types):
-  print("The selected user from form:", types)
-
-  global form,selected
-  #user is the name of student sent back by fetch in javascript
-  if types in hit:
-    selected = types
-
-    #the jsonify function is part of the Flask library and it needs to be imported
-    return (jsonify( {"data": hit[types]()} ))
-  else:
-    return (jsonify({}) )
 
 @app.route("/pitching", methods=["GET", "POST"])
 def pitching():
     from pitch import p2019, pg2019
+    global page, selected
 
+    print(selected)
+    page = "pitching"  # helps differeniate hitting and pitching category choices in resend_selectionForm_data function
     form = PitchingForm()
+    form.category.choices = pitch[selected]()
+
     if form.validate_on_submit():
         print("POST REQUEST COMPLETED!")
         year = request.form.to_dict(flat=False)["year"][0]
         types = request.form.to_dict(flat=False)["types"][0]
         playername = request.form.to_dict(flat=False)["player"][0]
         category = request.form.to_dict(flat=False)["category"][0]
-        if types == 'p' or types == 'progresive' or types == 'Progressive':
+        if types == 'P' or types == 'progresive' or types == 'Progressive':
             a, b, c = p2019(playername, category, year)
-        if types == 'pg' or types == 'per game' or types == 'Per game' or types == 'Per Game':
+        if types == 'PG' or types == 'per game' or types == 'Per game' or types == 'Per Game':
             a, b, c = pg2019(playername, category, year)
 
         return render_template(
@@ -106,6 +112,32 @@ def pitching():
     return render_template(
         "pitching.html",
         F=form)
+
+
+# This route will return data back to the website w/e the user changes the select field
+@app.route("/getdata/<types>")
+def resend_selectionForm_data(types):
+    global form, selected, page
+    print("The selected user from form:", types)
+
+    # user is the name of student sent back by fetch in javascript
+    if page == "hitting":
+        if types in hit:
+            selected = types
+            print("This means that selected now is:", selected)
+
+            # the jsonify function is part of the Flask library and it needs to be imported
+            return (jsonify({"data": hit[types]()}))
+        else:
+            return (jsonify({}))
+    elif page == "pitching":
+        if types in pitch:
+            selected = types
+
+            return (jsonify({"data": pitch[types]()}))
+        else:
+            return (jsonify({}))
+
 
 @app.route("/schedule", methods=["GET", "POST"])
 def schedule():
@@ -122,5 +154,5 @@ def schedule():
         "schedule.html",
         F=form)
 
-app.run(debug=True, use_reloader=False)
 
+app.run(debug=True, use_reloader=False)
