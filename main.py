@@ -29,7 +29,6 @@ def about():
         print(data)
     return render_template("about.html", F=form)
 
-
 hit = {
     "P": selections.h_p_categories,
     "PG": selections.h_pg_categories,
@@ -53,8 +52,9 @@ def hitting():
     from hit import p2019, pg2019
     global page, selected
 
-    # print(selected)
-    page = "hitting"  # helps differeniate hitting and pitching category choices in resend_selectionForm_data function
+    if page != "hitting":
+        selected = "Progressive"  # changes dynamic selectfield back to the progressive choices after page change
+    page = "hitting"  # helps differentiate hitting and pitching category choices in resend_selectionForm_data function
     form = HittingForm()
     form.category.choices = hit[selected]()
 
@@ -86,8 +86,9 @@ def pitching():
     from pitch import p2019, pg2019
     global page, selected
 
-    print(selected)
-    page = "pitching"  # helps differeniate hitting and pitching category choices in resend_selectionForm_data function
+    if page != "pitching":
+        selected = "Progressive"  # changes dynamic selectfield back to the progressive choices after page change
+    page = "pitching"  # helps differentiate hitting and pitching category choices in resend_selectionForm_data function
     form = PitchingForm()
     form.category.choices = pitch[selected]()
 
@@ -97,7 +98,7 @@ def pitching():
         types = request.form.to_dict(flat=False)["types"][0]
         playername = request.form.to_dict(flat=False)["player"][0]
         category = request.form.to_dict(flat=False)["category"][0]
-        if types == 'P' or types == 'progresive' or types == 'Progressive':
+        if types == 'P' or types == 'progressive' or types == 'Progressive':
             a, b, c = p2019(playername, category, year)
         if types == 'PG' or types == 'per game' or types == 'Per game' or types == 'Per Game':
             a, b, c = pg2019(playername, category, year)
