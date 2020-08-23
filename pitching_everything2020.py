@@ -54,7 +54,11 @@ def h_add(game_date, scoredata, ID):
     index = scoredata['home']['players'][ID]
     playername = scoredata['playerInfo'][ID]['fullName']
     # progressive
-    p_era = float(index['seasonStats']['pitching']['era'])
+    try:
+        p_era = float(index['seasonStats']['pitching']['era'])
+    except ValueError:
+        print("Something is wrong with", playername+"'s era category")
+        p_era = 0.0
     p_innings = float(index['seasonStats']['pitching']['inningsPitched'])
     p_hits = int(index['seasonStats']['pitching']['hits'])
     p_runs = int(index['seasonStats']['pitching']['runs'])
@@ -164,7 +168,11 @@ def a_add(game_date, scoredata, ID):
     index = scoredata['away']['players'][ID]
     playername = scoredata['playerInfo'][ID]['fullName']
     # progressive
-    p_era = float(index['seasonStats']['pitching']['era'])
+    try:
+        p_era = float(index['seasonStats']['pitching']['era'])
+    except ValueError:
+        print("Something is wrong with", playername+"'s era category")
+        p_era = 0.0
     p_innings = float(index['seasonStats']['pitching']['inningsPitched'])
     p_hits = int(index['seasonStats']['pitching']['hits'])
     p_runs = int(index['seasonStats']['pitching']['runs'])
