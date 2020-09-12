@@ -4,13 +4,15 @@ import datetime
 
 def hitting_everything2020():
     today = datetime.date.today()
-    yesterday = today - datetime.timedelta(days=1)
+    yesterday = today - datetime.timedelta(days=2)
     tomorrow = today + datetime.timedelta(days=1)
     sched = statsapi.schedule(start_date= yesterday, end_date = tomorrow, team=137)
     for i in range(len(sched)):
         gameId = sched[i]["game_id"]
-        game_date = sched[i]["game_date"]
         scoredata = statsapi.boxscore_data(gameId)
+        game_date = sched[i]["game_date"]
+        if sched[i]['doubleheader'] == 'Y':
+            game_date = sched[i]["game_date"]+"("+str(sched[i]["game_num"])+")"
         if path.exists("2020/h_dates.txt"):
             with open("2020/h_dates.txt", "r") as FILE:
                 content = FILE.read()

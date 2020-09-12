@@ -9,8 +9,10 @@ def pitching_everything2020():
     sched = statsapi.schedule(start_date= yesterday, end_date = tomorrow, team=137)
     for i in range(len(sched)):
         gameId = sched[i]["game_id"]
-        game_date = sched[i]["game_date"]
         scoredata = statsapi.boxscore_data(gameId)
+        game_date = sched[i]["game_date"]
+        if sched[i]['doubleheader'] == 'Y':
+            game_date = sched[i]["game_date"] + "(" + str(sched[i]["game_num"]) + ")"
         if path.exists("2020/p_dates.txt"):
             with open("2020/p_dates.txt", "r") as FILE:
                 content = FILE.read()
