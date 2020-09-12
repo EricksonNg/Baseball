@@ -5,6 +5,7 @@ from hitting_everything2020 import hitting_everything2020
 from pitching_everything2020 import pitching_everything2020
 # from standings import standings
 import selections
+import git
 
 try:
     hitting_everything2020()
@@ -158,6 +159,13 @@ def schedule():
     return render_template(
         "schedule.html",
         F=form)
+
+@app.route('/129521update', methods=['POST'])
+def webhook():
+    if request.method == 'POST':
+        repo = git.Repo('https://github.com/EricksonNg/Baseball.git')
+        origin = repo.remotes.origin
+    origin.pull()
 
 try:
     app.run(debug=True, use_reloader=False)
