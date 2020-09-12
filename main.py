@@ -3,10 +3,14 @@ from forms import ScheduleSearchForm, TestingForm, HittingForm, PitchingForm
 import mlbapi
 from hitting_everything2020 import hitting_everything2020
 from pitching_everything2020 import pitching_everything2020
+# from standings import standings
 import selections
 
-hitting_everything2020()
-pitching_everything2020()
+try:
+    hitting_everything2020()
+    pitching_everything2020()
+except Exception as e:
+    print(e)
 
 app = Flask('app')
 app.config["SECRET_KEY"] = "1234"
@@ -23,11 +27,7 @@ def homepage():
 
 @app.route("/about", methods=["GET", "POST"])
 def about():
-    form = TestingForm()
-    if form.validate_on_submit():
-        data = request.form.to_dict(flat=False)["language"][0]
-        print(data)
-    return render_template("about.html", F=form)
+    return render_template("about.html")
 
 hit = {
     "P": selections.h_p_categories,
@@ -64,9 +64,13 @@ def hitting():
         types = request.form.to_dict(flat=False)["types"][0]
         playername = request.form.to_dict(flat=False)["player"][0]
         category = request.form.to_dict(flat=False)["category"][0]
-        if types == 'P' or types == 'progressive' or types == 'Progressive':
+        if playername == 'Select A Player':
+            a = None
+            b = None
+            c = None
+        elif types == 'P' or types == 'progressive' or types == 'Progressive':
             a, b, c = p2019(playername, category, year)
-        if types == 'PG' or types == 'per game' or types == 'Per game' or types == 'Per Game':
+        elif types == 'PG' or types == 'per game' or types == 'Per game' or types == 'Per Game':
             a, b, c = pg2019(playername, category, year)
 
         return render_template(
@@ -100,7 +104,7 @@ def pitching():
         category = request.form.to_dict(flat=False)["category"][0]
         if types == 'P' or types == 'progressive' or types == 'Progressive':
             a, b, c = p2019(playername, category, year)
-        if types == 'PG' or types == 'per game' or types == 'Per game' or types == 'Per Game':
+        elif types == 'PG' or types == 'per game' or types == 'Per game' or types == 'Per Game':
             a, b, c = pg2019(playername, category, year)
 
         return render_template(
@@ -155,5 +159,7 @@ def schedule():
         "schedule.html",
         F=form)
 
-
-app.run(debug=True, use_reloader=False)
+try:
+    app.run(debug=True, use_reloader=False)
+except Exception as e:
+    print(e)
