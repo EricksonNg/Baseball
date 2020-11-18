@@ -1,0 +1,1 @@
+{'players': ['Aaron Civale', 'Adam Cimber', 'Adam Plutko', 'Brad Hand', 'Cal Quantrill', 'Cam Hill', 'Carlos Carrasco', 'Dominic Leone', 'James Karinchak', 'Kyle Nelson', 'Logan Allen', 'Mike Clevinger', 'Nick Wittgren', 'Oliver Perez', 'Phil Maton', 'Shane Bieber', 'Triston McKenzie', 'Zach Plesac']}

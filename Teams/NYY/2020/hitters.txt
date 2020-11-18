@@ -1,0 +1,1 @@
+{'players': ['Aaron Hicks', 'Aaron Judge', 'Brett Gardner', 'Chad Green', 'Clint Frazier', 'DJ LeMahieu', 'Erik Kratz', 'Estevan Florial', 'Gary Sanchez', 'Giancarlo Stanton', 'Gio Urshela', 'Gleyber Torres', 'Jonathan Holder', 'Jordy Mercer', 'Kyle Higashioka', 'Luke Voit', 'Miguel Andujar', 'Mike Ford', 'Mike Tauchman', 'Thairo Estrada', 'Tyler Wade']}
