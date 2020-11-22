@@ -263,7 +263,7 @@ def p2019(playername, category, year):
         'Blown Saves': 'Blown Saves'
     }
 
-    return dates, stat[category], name[category]
+    return dates, stat[category], playername+"'s "+name[category]
 
 
 def pg2019(playername, category, year):
@@ -434,4 +434,4 @@ def pg2019(playername, category, year):
         'Strikes': 'Strikes'
     }
 
-    return dates, stat[category], name[category]
+    return dates, stat[category], playername+"'s "+name[category]

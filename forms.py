@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired
-from selections import hitter_names, pitcher_names
+from selections import hitter_names, pitcher_names, all_hitters, all_pitchers
 
 class TeamSearchForm(FlaskForm):
     name = StringField("Team name: ", validators=[DataRequired()])
@@ -19,16 +19,25 @@ class TestingForm(FlaskForm):
     submit = SubmitField("Submit")
 
 class HittingForm(FlaskForm):
-    year = SelectField("Y:", choices=[('2020', '2020'), ('2019', '2019')], validators=[DataRequired()])
-    types = SelectField("T:", choices=[('Progressive', 'Progressive'), ('Per Game', 'Per Game')], validators=[DataRequired()])
-    category = SelectField("C:", choices=[], validators=[DataRequired()])
-    player = SelectField("P:", choices=hitter_names(), validators=[DataRequired()])
+    year = SelectField("Year:", choices=[('2020', '2020'), ('2019', '2019')], validators=[DataRequired()])
+    types = SelectField("Category Type:", choices=[('Progressive', 'Progressive'), ('Per Game', 'Per Game')], validators=[DataRequired()])
+    types2 = SelectField("Category Type:", choices=[('Optional','Optional'),('Progressive', 'Progressive'), ('Per Game', 'Per Game')])
+    category = SelectField("Category:", choices=[], validators=[DataRequired()])
+    # category2 = StringField("Category:")
+    category2 = SelectField("Category:", choices=[])
+    player = SelectField("Player:", choices=[], validators=[DataRequired()])
+    player2 = SelectField("Player 2: ", choices=[])
+    team = SelectField("Team: ", choices = [('SF','SF'),('ARI','ARI'),('COL','COL'),('LAD','LAD'),('SD','SD'),('CHC','CHC'),('CIN','CIN'),('MIL','MIL'),('PIT','PIT'),('STL','STL'),('ATL','ATL'),('MIA','MIA'),('NYM','NYM'),('PHI','PHI'),('WSH','WSH'),('HOU','HOU'),('LAA','LAA'),('OAK','OAK'),('SEA','SEA'),('TEX','TEX'),('CWS','CWS'),('CLE','CLE'),('DET','DET'),('KC','KC'),('MIN','MIN'),('BAL','BAL'),('BOS','BOS'),('NYY','NYY'),('TB','TB'),('TOR','TOR')])
+    team2 = SelectField("Team: ", choices = [('SF','SF'),('ARI','ARI'),('COL','COL'),('LAD','LAD'),('SD','SD'),('CHC','CHC'),('CIN','CIN'),('MIL','MIL'),('PIT','PIT'),('STL','STL'),('ATL','ATL'),('MIA','MIA'),('NYM','NYM'),('PHI','PHI'),('WSH','WSH'),('HOU','HOU'),('LAA','LAA'),('OAK','OAK'),('SEA','SEA'),('TEX','TEX'),('CWS','CWS'),('CLE','CLE'),('DET','DET'),('KC','KC'),('MIN','MIN'),('BAL','BAL'),('BOS','BOS'),('NYY','NYY'),('TB','TB'),('TOR','TOR')])
+    # team = StringField("Team: ")
     submit = SubmitField("->")
 
 class PitchingForm(FlaskForm):
     year = SelectField("Y:", choices=[('2020', '2020'), ('2019', '2019')], validators=[DataRequired()])
     types = SelectField("T:", choices=[('Progressive', 'Progressive'), ('Per Game', 'Per Game')], validators=[DataRequired()])
+    types2 = SelectField("T:", choices=[('Optional','Optional'),('Progressive', 'Progressive'), ('Per Game', 'Per Game')])
     category = SelectField("C:", choices=[], validators=[DataRequired()])
-    # category = StringField("C:", validators=[DataRequired()])
+    category2 = StringField("C:")
     player = SelectField("P:", choices=pitcher_names(), validators=[DataRequired()])
+    player2 = SelectField("Player 2: ", choices=pitcher_names())
     submit = SubmitField("->")

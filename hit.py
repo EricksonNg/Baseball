@@ -1,6 +1,6 @@
-def p2019(playername, category, year):
+def p2019(playername, category, year, team):
 
-  with open(year+"/"+playername+".txt", "r") as FILE:
+  with open("Teams/"+team+"/"+year+"/"+playername+".txt", "r") as FILE:
     content = FILE.read()
     content_dict = eval( content )
     index = content_dict[playername][year]['hitting']['progression']
@@ -135,7 +135,10 @@ def p2019(playername, category, year):
     'left on base':lob,
     'Left on base':lob,
     'Left On Base':lob,
-    "LOB":lob
+    'LOB':lob,
+
+    '': None,
+    'Optional': None
     }
 
   name={
@@ -250,14 +253,17 @@ def p2019(playername, category, year):
     'left on base':'Left On Base',
     'Left on base':'Left On Base',
     'Left On Base':'Left On Base',
-    "LOB":'Left On Base'
+    "LOB":'Left On Base',
+
+    '': None,
+    'Optional': None
     }
   
-  return dates, stat[category], name[category]
+  return dates, stat[category], playername+"'s "+name[category]+" (Progressive)"
 
-def pg2019(playername,category, year):
+def pg2019(playername,category, year, team):
   
-  with open(str(year)+"/"+playername+".txt", "r") as FILE:
+  with open("Teams/"+team+"/"+year+"/"+playername+".txt", "r") as FILE:
     content = FILE.read()
     content_dict = eval( content )
     index = content_dict[playername][year]['hitting']['per_game']
@@ -359,7 +365,10 @@ def pg2019(playername,category, year):
     'left on base':lob,
     'Left on base':lob,
     'Left On Base':lob,
-    "LOB":lob
+    "LOB":lob,
+
+    '': None,
+    'Optional': None
     }
 
   name={
@@ -473,7 +482,10 @@ def pg2019(playername,category, year):
     'left on base':'Left On Base',
     'Left on base':'Left On Base',
     'Left On Base':'Left On Base',
-    "LOB":'Left On Base'
+    "LOB":'Left On Base',
+
+    '': None,
+    'Optional': None
     }
   
-  return dates, stat[category], name[category]
+  return dates, stat[category], playername+"'s "+name[category]+" (Per Game)"
