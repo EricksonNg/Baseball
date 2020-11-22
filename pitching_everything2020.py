@@ -6,15 +6,20 @@ def pitching_everything2020():
     today = datetime.date.today()
     yesterday = today - datetime.timedelta(days=1)
     tomorrow = today + datetime.timedelta(days=1)
-    sched = statsapi.schedule(start_date= yesterday, end_date = tomorrow, team=137)
+    team = 137
+    info = statsapi.get('team', {'teamId': team})
+    name = info['teams'][0]['name']
+    abbrev = info['teams'][0]['abbreviation']
+    print (abbrev)
+    sched = statsapi.schedule(start_date='07/23/2020', end_date='9/27/2020', team=team)
     for i in range(len(sched)):
         gameId = sched[i]["game_id"]
         scoredata = statsapi.boxscore_data(gameId)
         game_date = sched[i]["game_date"]
         if sched[i]['doubleheader'] == 'Y':
             game_date = sched[i]["game_date"] + "(" + str(sched[i]["game_num"]) + ")"
-        if path.exists("2020/p_dates.txt"):
-            with open("2020/p_dates.txt", "r") as FILE:
+        if path.exists("Teams/"+abbrev+"/2020/p_dates.txt"):
+            with open("Teams/"+abbrev+"/2020/p_dates.txt", "r") as FILE:
                 content = FILE.read()
                 try:
                     content_dict = eval(content)
@@ -22,9 +27,9 @@ def pitching_everything2020():
                     print("we got an error ", e)
                     print("Database Error ")
         else:
-            with open("2020/p_dates.txt", "w") as FILE:
+            with open("Teams/"+abbrev+"/2020/p_dates.txt", "w") as FILE:
                 FILE.write("{'dates':[]}")
-            with open("2020/p_dates.txt", "r") as FILE:
+            with open("Teams/"+abbrev+"/2020/p_dates.txt", "r") as FILE:
                 content = FILE.read()
                 try:
                     content_dict = eval(content)
@@ -34,17 +39,17 @@ def pitching_everything2020():
         if game_date not in content_dict['dates'] and (sched[i]['status'] == "Final" or sched[i]['status'] == "Game Over"):
             if sched[i]["game_type"] == "R":
                 for ID in scoredata['playerInfo']:
-                    if sched[i]['home_name'] == "San Francisco Giants":
+                    if sched[i]['home_name'] == name:
                         if ID in scoredata['home']['players']:
                             if scoredata['home']['players'][ID]['stats']['pitching'] != {}:
                                 if scoredata['home']['players'][ID]['position']['abbreviation'] == 'P':
-                                    h_add(game_date, scoredata, ID)
+                                    h_add(game_date, scoredata, ID, abbrev)
                     else:
                         if ID in scoredata['away']['players']:
                             if scoredata['away']['players'][ID]['stats']['pitching'] != {}:
                                 if scoredata['away']['players'][ID]['position']['abbreviation'] == 'P':
-                                    a_add(game_date, scoredata, ID)
-                with open("2020/p_dates.txt", "w") as f:
+                                    a_add(game_date, scoredata, ID, abbrev)
+                with open("Teams/"+abbrev+"/2020/p_dates.txt", "w") as f:
                     try:
                         content_dict['dates'].append(game_date)
                         f.write(str(content_dict))
@@ -52,7 +57,7 @@ def pitching_everything2020():
                         print("we got an error ", e)
                         print("Database Error ")
 
-def h_add(game_date, scoredata, ID):
+def h_add(game_date, scoredata, ID, abbrev):
     index = scoredata['home']['players'][ID]
     playername = scoredata['playerInfo'][ID]['fullName']
     # progressive
@@ -95,10 +100,10 @@ def h_add(game_date, scoredata, ID):
                'ab', 'obp', 'wins', 'losses', 'holds', 'blown_saves']
     pg_names = ['innings', 'hits', 'runs', 'earned_runs', 'walks', 'strikeouts', 'homeruns', 'pitches', 'strikes']
 
-    if path.exists("2020/" + playername + ".txt"):
+    if path.exists("Teams/"+abbrev+"/2020/" + playername + ".txt"):
         print("============================================")
         print("File Exists For", playername)
-        with open("2020/" + str(playername) + ".txt", "r") as FILE:
+        with open("Teams/"+abbrev+"/2020/" + str(playername) + ".txt", "r") as FILE:
             content = FILE.read()
             try:
                 content_dict = eval(content)
@@ -110,16 +115,16 @@ def h_add(game_date, scoredata, ID):
     else:
         print("============================================")
         print("Creating File For Pitcher", playername)
-        with open("2020/" + str(playername) + ".txt", "w") as f:
+        with open("Teams/"+abbrev+"/2020/" + str(playername) + ".txt", "w") as f:
             f.write(
                 "{'" + playername + "': {'ID':'" + ID + "', '2020': { 'pitching' : {'dates': [], 'progression': {'era': [], 'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'doubles': [], 'triples': [], 'ab': [], 'obp': [], 'wins': [], 'losses': [], 'holds': [], 'blown_saves': []}, 'per_game': {'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'pitches': [], 'strikes': []}}, 'hitting': {'dates': [], 'progression': {'averages': [], 'obp': [], 'slg': [], 'ops': [], 'runs': [], 'doubles': [], 'triples': [], 'homeruns': [], 'strikeouts': [], 'walks': [], 'hits': [], 'ab': [], 'sb': [], 'rbi': [], 'lob': []}, 'per_game': {'ab': [], 'strikeouts': [], 'hits': [], 'walks': [], 'runs': [], 'rbi': [], 'sb': [], 'lob': [], 'doubles': [], 'triples': [], 'homeruns': []}}}}}")
-        with open("2020/" + str(playername) + ".txt", "r") as FILE:
+        with open("Teams/"+abbrev+"/2020/" + str(playername) + ".txt", "r") as FILE:
             content = FILE.read()
             content_dict = eval(content)
 
     if game_date not in content_dict[playername]['2020']['pitching']['dates']:
         print("-----Stats not added yet for", game_date + "-----")
-        with open("2020/" + str(playername) + ".txt", "w") as f:
+        with open("Teams/"+abbrev+"/2020/" + str(playername) + ".txt", "w") as f:
             try:
                 content_dict[playername]['2020']['pitching']['dates'].append(game_date)
                 for i in range(len(p_categories)):
@@ -137,8 +142,8 @@ def h_add(game_date, scoredata, ID):
         print("-----Stats already added for", game_date + "-----")
         print("============================================")
 
-    if path.exists("2020/pitchers.txt"):
-        with open("2020/pitchers.txt", "r") as FILE:
+    if path.exists("Teams/"+abbrev+"/2020/pitchers.txt"):
+        with open("Teams/"+abbrev+"/2020/pitchers.txt", "r") as FILE:
             content = FILE.read()
             try:
                 content_dict = eval(content)
@@ -146,9 +151,9 @@ def h_add(game_date, scoredata, ID):
                 print("we got an error ", e)
                 print("Database Error ")
     else:
-        with open("2020/pitchers.txt", "w") as FILE:
+        with open("Teams/"+abbrev+"/2020/pitchers.txt", "w") as FILE:
             FILE.write("{'players':[]}")
-        with open("2020/pitchers.txt", "r") as FILE:
+        with open("Teams/"+abbrev+"/2020/pitchers.txt", "r") as FILE:
             content = FILE.read()
             try:
                 content_dict = eval(content)
@@ -157,7 +162,7 @@ def h_add(game_date, scoredata, ID):
                 print("Database Error ")
 
     if playername not in content_dict['players']:
-        with open("2020/pitchers.txt", "w") as f:
+        with open("Teams/"+abbrev+"/2020/pitchers.txt", "w") as f:
             try:
                 content_dict['players'].append(playername)
                 content_dict['players'].sort()
@@ -166,7 +171,7 @@ def h_add(game_date, scoredata, ID):
                 print("we got an error ", e)
                 print("Database Error ")
 
-def a_add(game_date, scoredata, ID):
+def a_add(game_date, scoredata, ID, abbrev):
     index = scoredata['away']['players'][ID]
     playername = scoredata['playerInfo'][ID]['fullName']
     # progressive
@@ -209,10 +214,10 @@ def a_add(game_date, scoredata, ID):
                'ab', 'obp', 'wins', 'losses', 'holds', 'blown_saves']
     pg_names = ['innings', 'hits', 'runs', 'earned_runs', 'walks', 'strikeouts', 'homeruns', 'pitches', 'strikes']
 
-    if path.exists("2020/" + playername + ".txt"):
+    if path.exists("Teams/"+abbrev+"/2020/" + playername + ".txt"):
         print("============================================")
         print("File Exists For", playername)
-        with open("2020/" + str(playername) + ".txt", "r") as FILE:
+        with open("Teams/"+abbrev+"/2020/" + str(playername) + ".txt", "r") as FILE:
             content = FILE.read()
             try:
                 content_dict = eval(content)
@@ -224,16 +229,16 @@ def a_add(game_date, scoredata, ID):
     else:
         print("Creating File For Pitcher", playername)
         print("============================================")
-        with open("2020/" + str(playername) + ".txt", "w") as f:
+        with open("Teams/"+abbrev+"/2020/" + str(playername) + ".txt", "w") as f:
             f.write(
                 "{'" + playername + "': {'ID':'" + ID + "', '2020': { 'pitching' : {'dates': [], 'progression': {'era': [], 'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'doubles': [], 'triples': [], 'ab': [], 'obp': [], 'wins': [], 'losses': [], 'holds': [], 'blown_saves': []}, 'per_game': {'innings': [], 'hits': [], 'runs': [], 'earned_runs': [], 'walks': [], 'strikeouts': [], 'homeruns': [], 'pitches': [], 'strikes': []}}, 'hitting': {'dates': [], 'progression': {'averages': [], 'obp': [], 'slg': [], 'ops': [], 'runs': [], 'doubles': [], 'triples': [], 'homeruns': [], 'strikeouts': [], 'walks': [], 'hits': [], 'ab': [], 'sb': [], 'rbi': [], 'lob': []}, 'per_game': {'ab': [], 'strikeouts': [], 'hits': [], 'walks': [], 'runs': [], 'rbi': [], 'sb': [], 'lob': [], 'doubles': [], 'triples': [], 'homeruns': []}}}}}")
-        with open("2020/" + str(playername) + ".txt", "r") as FILE:
+        with open("Teams/"+abbrev+"/2020/" + str(playername) + ".txt", "r") as FILE:
             content = FILE.read()
             content_dict = eval(content)
 
     if game_date not in content_dict[playername]['2020']['pitching']['dates']:
         print("-----Stats not added yet for", game_date + "-----")
-        with open("2020/" + str(playername) + ".txt", "w") as f:
+        with open("Teams/"+abbrev+"/2020/" + str(playername) + ".txt", "w") as f:
             try:
                 content_dict[playername]['2020']['pitching']['dates'].append(game_date)
                 for i in range(len(p_categories)):
@@ -251,8 +256,8 @@ def a_add(game_date, scoredata, ID):
         print("-----Stats already added for", game_date + "-----")
         print("============================================")
 
-    if path.exists("2020/pitchers.txt"):
-        with open("2020/pitchers.txt", "r") as FILE:
+    if path.exists("Teams/"+abbrev+"/2020/pitchers.txt"):
+        with open("Teams/"+abbrev+"/2020/pitchers.txt", "r") as FILE:
             content = FILE.read()
             try:
                 content_dict = eval(content)
@@ -260,9 +265,9 @@ def a_add(game_date, scoredata, ID):
                 print("we got an error ", e)
                 print("Database Error ")
     else:
-        with open("2020/pitchers.txt", "w") as FILE:
+        with open("Teams/"+abbrev+"/2020/pitchers.txt", "w") as FILE:
             FILE.write("{'players':[]}")
-        with open("2020/pitchers.txt", "r") as FILE:
+        with open("Teams/"+abbrev+"/2020/pitchers.txt", "r") as FILE:
             content = FILE.read()
             try:
                 content_dict = eval(content)
@@ -271,7 +276,7 @@ def a_add(game_date, scoredata, ID):
                 print("Database Error ")
 
     if playername not in content_dict['players']:
-        with open("2020/pitchers.txt", "w") as f:
+        with open("Teams/"+abbrev+"/2020/pitchers.txt", "w") as f:
             try:
                 content_dict['players'].append(playername)
                 content_dict['players'].sort()
