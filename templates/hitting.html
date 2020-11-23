@@ -2,31 +2,52 @@
 
 {%  block body  %}
 
-<form method="POST" action="">
+<form method="POST" action="" onload="load()">
     {{ F.hidden_tag() }}
+    <div>
     {{F.year.label}} {{F.year(placeholder = "Year")}}
-    {{F.types.label}} {{F.types(placeholder = "Progressive or Per Game")}}
+    </div>
+    <div>
+    {{F.team.label}} {{F.team(placeholder = "Team")}}
     {{F.player.label}} {{F.player(placeholder = "Player")}}
-    {{F.category.label}} {{F.category(placeholder = "Catergory")}}
+    || {{F.team2.label}} {{F.team2(placeholder = "Team")}}
+    {{F.player2.label}} {{F.player2(placeholder = "Player")}}
+    </div>
+    <div>
+    {{F.types.label}} {{F.types(placeholder = "Progressive or Per Game")}}
+    {{F.category.label}} {{F.category(placeholder = "Category")}}
+    </div>
+    {{F.types2.label}} {{F.types2(placeholder = "Progressive or Per Game")}}
+    {{F.category2.label}} {{F.category2(placeholder = "Category")}}
     {{F.submit}}
 </form>
 
 <script src="{{url_for('static', filename='script.js')}}"></script>
+<script src="{{url_for('static', filename='script2.js')}}"></script>
+<script src="{{url_for('static', filename='script3.js')}}"></script>
+<script src="{{url_for('static', filename='script4.js')}}"></script>
+
+<script>function load(){
+updateselectionfield()
+updateselectionfield2()
+updateselectionfield3()
+updateselectionfield4()
+}</script>
 
 {% if player_category and player_date %}
 
 <!-- cancas element -->
 <div id="chart">
-    <canvas id="myChart" width="750" height="500"></canvas>
-    <canvas id="myChart2" width="750" height="500"></canvas>
-    <canvas id="myChart3" width="750" height="500"></canvas>
+    <canvas id="myChart" width="500" height="250"></canvas>
+    {% if category2 and player_date %}
+    <canvas id="myChart2" width="500" height="250"></canvas>
+    {% endif %}
 </div>
+
 <!-- Js code -->
 <script>
       Chart.defaults.global.responsive = false;
-
       graph();
-
       function graph(){
       var ctx = document.getElementById('myChart').getContext('2d');
       var myChart = new Chart(ctx,
@@ -34,7 +55,8 @@
           type: 'line',
           data: {
               labels: {{ player_date | tojson }},
-              datasets: [{
+              datasets: [
+              {
                   label: {{ category | tojson }},
                   data: {{ player_category | tojson }},
                   backgroundColor: [
@@ -45,8 +67,21 @@
                   ],
                   borderWidth: 1,
                   lineTension: 0
-              }]
-
+              }
+<!--              ,-->
+<!--              {-->
+<!--              label:"second line",-->
+<!--              data: {{ category2 | tojson }},-->
+<!--              backgroundColor: [-->
+<!--                      'rgba(0, 0, 0, 0.8)'-->
+<!--                  ],-->
+<!--              borderColor: [-->
+<!--                      'black'-->
+<!--                  ],-->
+<!--              borderWidth: 1,-->
+<!--              lineTension: 0-->
+<!--            }-->
+            ]
           },
           options: {
                scales: {
@@ -67,11 +102,56 @@
       })
 
       };
-
-
 </script>
-
 {% endif %}
+
+{% if player_category2 and player_date %}
+<script>
+      Chart.defaults.global.responsive = false;
+      graph2();
+      function graph2(){
+      var ctx = document.getElementById('myChart2').getContext('2d');
+      var myChart = new Chart(ctx,
+        {
+          type: 'line',
+          data: {
+              labels: {{ player_date2 | tojson }},
+              datasets: [
+              {
+                  label: {{ category2 | tojson }},
+                  data: {{ player_category2 | tojson }},
+                  backgroundColor: [
+                      'rgba(254, 90, 29, 0.8)'
+                  ],
+                  borderColor: [
+                      'black'
+                  ],
+                  borderWidth: 1,
+                  lineTension: 0
+              }]
+          },
+          options: {
+               scales: {
+                    xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                            }
+                        }],
+                    yAxes: [{
+                            display: true,
+                            ticks: {
+                                min: 0
+                            }
+                        }]
+                },
+          }
+      })
+
+      };
+</script>
+{% endif %}
+
 
 {% endblock %}
 
