@@ -77,16 +77,18 @@ def hitting():
         playername2 = request.form.to_dict(flat=False)["player2"][0]
         team = request.form.to_dict(flat=False)["team"][0]
         team2 = request.form.to_dict(flat=False)["team2"][0]
-        if 'Select A Player' in playername2:
-            playername2 = playername
         category = request.form.to_dict(flat=False)["category"][0]
         category2 = request.form.to_dict(flat=False)["category2"][0]
+        if 'Select A Player' in playername2:
+            playername2 = playername
+            team2 = team
         if 'Select A Player' in playername:
             a = None
             b = None
             c = None
             d = None
             e = None
+            f = None
         elif types == 'P' or types == 'progressive' or types == 'Progressive':
             a, b, c = p2019(playername, category, year, team)
         elif types == 'PG' or types == 'per game' or types == 'Per game' or types == 'Per Game':

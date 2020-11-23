@@ -19,7 +19,7 @@
     <div id = "nav_bar">
       <ul>
         <li> <a {% if request.path == '/home' %}class="active"{% endif %} href="{{ url_for('homepage') }}">Home</a></li> 
-        <li> <a {% if request.path == '/about' %}class="active"{% endif %} href="{{ url_for('about') }}">About</a></li>
+        <li> <a {% if request.path == '/about' %}class="active"{% endif %} href="{{ url_for('about') }}">Standings</a></li>
         <li> <a {% if request.path == '/hitting' %}class="active"{% endif %} href="{{url_for('hitting')}}">Hitting</a></li>
         <li> <a {% if request.path == '/pitching' %}class="active"{% endif %} href="{{url_for('pitching')}}">Pitching</a></li>
         <li> <a {% if request.path == '/schedule' %}class="active"{% endif %} href="{{ url_for('schedule') }}">Schedule</a></li>

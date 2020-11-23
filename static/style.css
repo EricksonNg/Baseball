@@ -44,6 +44,7 @@ body{
   color:tomato;
   float:left;
   padding-left:10%;
+  padding-right:10%;
   font-size:25px;
 
 }
@@ -62,7 +63,7 @@ body{
 
 #body_div{
   margin-top:10%;
-  padding:100px;
+  padding:50px;
 }
 
 /* #chart{
