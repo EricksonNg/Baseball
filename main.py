@@ -16,6 +16,7 @@ import git
 app = Flask('app')
 app.config["SECRET_KEY"] = "1234"
 
+
 # Python decorator
 @app.route('/')
 @app.route('/home')
@@ -28,6 +29,7 @@ def homepage():
 @app.route("/about", methods=["GET", "POST"])
 def about():
     return render_template("about.html")
+
 
 hit = {
     "P": selections.h_p_categories,
@@ -55,7 +57,6 @@ page = "hitting"  # giving page a default value (doesn't really affect anything)
 def hitting():
     from hit import p2019, pg2019
     global page, selected, selected2, team, team2, category2
-
     if page != "hitting":
         selected = "Progressive"  # changes dynamic selectfield back to the progressive choices after page change
         selected2 = "Optional"
@@ -80,9 +81,11 @@ def hitting():
         category = request.form.to_dict(flat=False)["category"][0]
         category2 = request.form.to_dict(flat=False)["category2"][0]
         if 'Select A Player' in playername2:
+            print("1: A player is not selected for the second player form")
             playername2 = playername
             team2 = team
         if 'Select A Player' in playername:
+            print("A player is not selected at all")
             a = None
             b = None
             c = None
@@ -94,6 +97,7 @@ def hitting():
         elif types == 'PG' or types == 'per game' or types == 'Per game' or types == 'Per Game':
             a, b, c = pg2019(playername, category, year, team)
         if 'Select A Player' in playername:
+            print("2: A player is not selected for the second player form")
             a = None
             b = None
             c = None
@@ -101,10 +105,12 @@ def hitting():
             e = None
             f = None
         if category2 == '':
+            print("The second category form is empty")
             d = None
             e = None
             f = None
         elif types2 == 'Optional':
+            print("The second types form is empty")
             d = None
             e = None
             f = None
@@ -113,15 +119,14 @@ def hitting():
         elif types2 == 'PG' or types2 == 'per game' or types2 == 'Per Game':
             f, d, e = pg2019(playername2, category2, year, team2)
 
-
         return render_template(
             "hitting.html", F=form,
             player_date=a,
-            player_date2 = f,
+            player_date2=f,
             player_category=b,
             category=c,
-            player_category2 = d,
-            category2 = e,
+            player_category2=d,
+            category2=e,
             player_name=playername)
 
     return render_template(
@@ -181,22 +186,21 @@ def pitching():
         elif types2 == 'PG' or types2 == 'per game' or types2 == 'Per Game':
             f, d, e = pg2019(playername2, category2, year)
 
-
         return render_template(
             "hitting.html", F=form,
             player_date=a,
-            player_date2 = f,
+            player_date2=f,
             player_category=b,
             category=c,
-            player_category2 = d,
-            category2 = e,
+            player_category2=d,
+            category2=e,
             player_name=playername)
 
     return render_template(
         "pitching.html",
         F=form)
 
-# This route will return data back to the website w/e the user changes the select field
+#first category form
 @app.route("/getdata/<types>")
 def resend_selectionForm_data(types):
     global form, selected, page
@@ -220,10 +224,11 @@ def resend_selectionForm_data(types):
         else:
             return (jsonify({}))
 
+#second category form
 @app.route("/getdata2/<types>")
 def resend_selectionForm_data2(types):
     global form, selected2, page
-    print("The selected user from form:", types)
+    print("The selected user from form 2:", types)
 
     # user is the name of student sent back by fetch in javascript
     if page == "hitting":
@@ -243,6 +248,7 @@ def resend_selectionForm_data2(types):
         else:
             return (jsonify({}))
 
+#first team form
 @app.route("/getdata3/<types>")
 def resend_selectionForm_data3(types):
     global form, team, page
@@ -256,15 +262,16 @@ def resend_selectionForm_data3(types):
         return (jsonify({"data": selections.all_hitters(team)}))
     elif page == "pitching":
         if types in pitch:
-            selected2 = types
+            team = types
 
             return (jsonify({"data": pitch[types]()}))
         else:
             return (jsonify({}))
 
+#second team form
 @app.route("/getdata4/<types>")
 def resend_selectionForm_data4(types):
-    global form, team, page
+    global form, team2, page
     print("The team from form:", types)
 
     if page == "hitting":
@@ -281,6 +288,7 @@ def resend_selectionForm_data4(types):
         else:
             return (jsonify({}))
 
+
 @app.route("/schedule", methods=["GET", "POST"])
 def schedule():
     form = ScheduleSearchForm()
@@ -295,6 +303,7 @@ def schedule():
     return render_template(
         "schedule.html",
         F=form)
+
 
 # @app.route('/129521update', methods=['POST'])
 # def webhook():
