@@ -1,0 +1,1 @@
+{'players': ['Brad Peacock', 'Charlie Morton', 'Chris Devenski', 'Cionel Perez', 'Collin McHugh', 'Dallas Keuchel', 'Dean Deetz', 'Framber Valdez', 'Gerrit Cole', 'Hector Rondon', 'J.D. Davis', 'James Hoyt', 'Joe Smith', 'Josh James', 'Justin Verlander', 'Ken Giles', 'Lance McCullers Jr.', 'Reymin Guduan', 'Roberto Osuna', 'Ryan Pressly', 'Tony Sipp', 'Will Harris']}

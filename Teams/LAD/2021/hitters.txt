@@ -1,0 +1,1 @@
+{'players': ['AJ Pollock', 'Adam Kolarek', 'Austin Barnes', 'Chris Taylor', 'Cody Bellinger', 'Corey Seager', 'Edwin Rios', 'Enrique Hernandez', 'Gavin Lux', 'Joc Pederson', 'Justin Turner', 'Keibert Ruiz', 'Matt Beaty', 'Max Muncy', 'Mookie Betts', 'Terrance Gore', 'Tony Gonsolin', 'Will Smith', 'Zach McKinstry']}

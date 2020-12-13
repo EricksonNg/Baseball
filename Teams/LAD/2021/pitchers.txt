@@ -1,0 +1,1 @@
+{'players': ['Adam Kolarek', 'Alex Wood', 'Blake Treinen', 'Brusdar Graterol', 'Caleb Ferguson', 'Clayton Kershaw', 'Dennis Santana', 'Dustin May', 'Dylan Floro', 'Jake McGee', 'Joe Kelly', 'Josh Sborz', 'Julio Urias', 'Kenley Jansen', 'Mitch White', 'Pedro Baez', 'Ross Stripling', 'Scott Alexander', 'Tony Gonsolin', 'Victor Gonzalez', 'Walker Buehler']}
