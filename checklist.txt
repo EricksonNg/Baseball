@@ -1,1 +1,7 @@
+New stats to add for...
 
+pitchers:
+
+hitters:
+
+fielding:
