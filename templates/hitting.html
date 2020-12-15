@@ -26,12 +26,15 @@
 <script src="{{url_for('static', filename='script2.js')}}"></script>
 <script src="{{url_for('static', filename='script3.js')}}"></script>
 <script src="{{url_for('static', filename='script4.js')}}"></script>
+<script src="{{url_for('static', filename='script5.js')}}"></script>
+<script src="{{url_for('static', filename='script6.js')}}"></script>
 
 <script>function load(){
-updateselectionfield()
-updateselectionfield2()
-updateselectionfield3()
-updateselectionfield4()
+updateselectionfield();
+updateselectionfield2();
+updateselectionfield3();
+updateselectionfield4();
+console.log("Working");
 }</script>
 
 {% if player_category and player_date %}

@@ -2,13 +2,15 @@
 
 {%  block body  %}
 
-<form method="POST" action="">
+<form method="POST" action="" onload="load()">
     {{ F.hidden_tag() }}
     <div>
     {{F.year.label}} {{F.year(placeholder = "Year")}}
     </div>
     <div>
+    {{F.team.label}} {{F.team(placeholder = "Team")}}
     {{F.player.label}} {{F.player(placeholder = "Player")}}
+    || {{F.team2.label}} {{F.team2(placeholder = "Team")}}
     {{F.player2.label}} {{F.player2(placeholder = "Player")}}
     </div>
     <div>
@@ -21,6 +23,19 @@
 </form>
 
 <script src="{{url_for('static', filename='script.js')}}"></script>
+<script src="{{url_for('static', filename='script2.js')}}"></script>
+<script src="{{url_for('static', filename='script3.js')}}"></script>
+<script src="{{url_for('static', filename='script4.js')}}"></script>
+<script src="{{url_for('static', filename='script5.js')}}"></script>
+<script src="{{url_for('static', filename='script6.js')}}"></script>
+
+<script>function load(){
+updateselectionfield();
+updateselectionfield2();
+updateselectionfield3();
+updateselectionfield4();
+console.log("Working");
+}</script>
 
 {% if player_category and player_date %}
 
