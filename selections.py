@@ -60,7 +60,7 @@ def p_p_categories():
     return data
 
 def p_pg_categories():
-    categories = ['Air Outs', 'At Bats', 'Balks', 'Balls', 'Batters Faced', 'Blown Saves', 'Catchers Interferences', 'Caught Stealings', 'Complete Games', 'Doubles', 'ERA', 'Earned Runs', 'Games', 'Games Finished', 'Games Started', 'Ground Outs', 'Ground to Air', 'Hit By Pitches', 'Hits', 'Hits Per 9', 'Holds', 'Home Runs', 'Home Runs Per 9', 'Inherited Runners Scored', 'Innings', 'Intentional Walks', 'Losses', 'On Base Percentage', 'Outs', 'Pickoffs', 'Pitches', 'Pitches Per Inning', 'Runs', 'Runs Batted In', 'Runs Per 9', 'Sacrifice Bunts', 'Sacrifice Flies', 'Save Opportunities', 'Saves', 'Shut Outs', 'Stolen Base Percentage', 'Stolen Bases', 'Strike Percentage', 'Strikeout To Walk', 'Strikeouts', 'Strikeouts Per 9', 'Strikes', 'Triples', 'WHIP', 'Walks', 'Walks Per 9', 'Wild Pitches', 'Win Percentage', 'Wins']
+    categories = ['Air Outs', 'At Bats', 'Balks', 'Balls', 'Batters Faced', 'Blown Saves', 'Catchers Interferences', 'Caught Stealings', 'Complete Games', 'Doubles', 'Earned Runs', 'Games Finished', 'Games Started', 'Ground Outs', 'Hit By Pitches', 'Hits', 'Hits Per 9', 'Holds', 'Home Runs', 'Home Runs Per 9', 'Inherited Runners Scored', 'Innings', 'Intentional Walks', 'Losses', 'On Base Percentage', 'Outs', 'Pickoffs', 'Pitches', 'Pitches Per Inning', 'Runs', 'Runs Batted In', 'Runs Per 9', 'Sacrifice Bunts', 'Sacrifice Flies', 'Save Opportunities', 'Saves', 'Shut Outs', 'Stolen Base Percentage', 'Stolen Bases', 'Strike Percentage', 'Strikeouts', 'Strikeouts Per 9', 'Strikes', 'Triples', 'WHIP', 'Walks', 'Walks Per 9', 'Wild Pitches', 'Wins']
     data = []
     for i in range(len(categories)):
         data.append((categories[i], categories[i]))
