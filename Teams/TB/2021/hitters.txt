@@ -1,1 +1,0 @@
-{'players': ['Austin Meadows', 'Brandon Lowe', 'Brett Phillips', "Brian O'Grady", 'Hunter Renfroe', 'Ji-Man Choi', 'Joey Wendle', 'Jose Martinez', 'Kevan Smith', 'Kevin Kiermaier', 'Manuel Margot', 'Michael Perez', 'Mike Brosseau', 'Mike Zunino', 'Nate Lowe', 'Randy Arozarena', 'Willy Adames', 'Yandy Diaz', 'Yoshi Tsutsugo']}

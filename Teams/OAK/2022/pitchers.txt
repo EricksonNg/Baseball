@@ -1,1 +1,0 @@
-{'players': ['Burch Smith', 'Chris Bassitt', 'Daniel Mengden', 'Daulton Jefferies', 'Frankie Montas', 'J.B. Wendelken', 'Jake Diekman', 'James Kaprielian', 'Jesus Luzardo', 'Joakim Soria', 'Jordan Weems', 'Liam Hendriks', 'Lou Trivino', 'Mike Fiers', 'Mike Minor', 'Paul Blackburn', 'Sean Manaea', 'T.J. McFarland', 'Yusmeiro Petit']}
