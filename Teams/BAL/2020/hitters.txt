@@ -1,0 +1,1 @@
+{'players': ['Andrew Velazquez', 'Anthony Santander', 'Austin Hays', 'Bryan Holaday', 'Cedric Mullins', 'Cesar Valdez', 'Chance Sisco', 'Chris Davis', 'DJ Stewart', 'Dilson Herrera', 'Dwight Smith', 'Hanser Alberto', 'Jose Iglesias', 'Mason Williams', 'Pat Valaika', 'Pedro Severino', 'Ramon Urias', 'Renato Nunez', 'Rio Ruiz', 'Ryan Mountcastle', 'Travis Lakins Sr.']}

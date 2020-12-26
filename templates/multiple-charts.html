@@ -1,0 +1,30 @@
+{% extends "main.html" %}
+
+{% if chartdata %}
+
+    <div><p>{{chartdata}}</p></div>
+    <div id = "chart-container">
+        {% for i in range(len(chartdata["type"])) %}
+        <script type="text/javascript">
+            var container = document.getElementById("chart-container")
+            var div = document.createElement('div')
+            var temp_chart = document.createElement('canvas')
+            temp_chart.class = "charts"
+            div.class = "flexchart"
+            div.style.visibility = "hidden";
+            if ("{{chartdata['type'][i]}}" "Pergame" ){
+                var myChart2 = new Chart(temp_chart, pergame)
+                div.appendChild(temp_chart)
+                container.appendChild(div)
+            }else{
+                var myChart2 = new Chart(temp_chart, progressive)
+                div.appendChild(temp_chart)
+                container.appendChild(div)
+            }
+
+        </script>
+        {% endfor %}
+
+    </div>
+
+{% endif %}
