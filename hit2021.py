@@ -39,7 +39,7 @@ def p(playername, category, year, team):
         battingAverageOnBallsInPlay = index['babip']
         catchersInterfences = index['ci']
         pickoffs = index['pickoffs']
-        atBatsPerHomeRun = index['ab_per_hr']
+        atBatsPerHomeRun = index['ab per hr']
 
     # sanitize
     stat = {
@@ -656,3 +656,14 @@ def pg(playername, category, year, team):
     }
 
     return dates, stat[category], playername + "'s " + name[category] + " (Per Game)"
+
+def getID(playername, year, team):
+
+    with open("Teams/" + team + "/" + year + "/" + playername + ".txt", "r") as FILE:
+        try:
+            content = FILE.read()
+            content_dict = eval(content)
+        except Exception as e:
+            input(e)
+        front, ID = content_dict[playername]['ID'].split("ID")
+    return ID
