@@ -1,1 +1,0 @@
-{'players': ['Brendan Rodgers', 'Charlie Blackmon', 'Chris Owings', 'Daniel Murphy', 'David Dahl', 'Drew Butera', 'Elias Diaz', 'Garrett Hampson', 'Josh Fuentes', 'Kevin Pillar', 'Matt Kemp', 'Nolan Arenado', 'Raimel Tapia', 'Ryan McMahon', 'Sam Hilliard', 'Tony Wolters', 'Trevor Story']}

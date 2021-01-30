@@ -1,1 +1,0 @@
-{'players': ['Abraham Toro', 'Aledmys Diaz', 'Alex Bregman', 'Carlos Correa', 'Dustin Garneau', 'Garrett Stubbs', 'George Springer', 'Jack Mayfield', 'Jose Altuve', 'Josh Reddick', 'Kyle Tucker', 'Martin Maldonado', 'Michael Brantley', 'Myles Straw', 'Taylor Jones', 'Yordan Alvarez', 'Yuli Gurriel']}

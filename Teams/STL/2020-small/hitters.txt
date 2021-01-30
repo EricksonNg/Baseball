@@ -1,1 +1,0 @@
-{'players': ['Andrew Knizner', 'Austin Dean', 'Brad Miller', 'Dexter Fowler', 'Dylan Carlson', 'Genesis Cabrera', 'Harrison Bader', 'Jake Woodford', 'John Nogowski', 'Justin Williams', 'Kolten Wong', 'Lane Thomas', 'Matt Carpenter', 'Matt Wieters', 'Max Schrock', 'Paul DeJong', 'Paul Goldschmidt', 'Rangel Ravelo', 'Seth Elledge', 'Tommy Edman', "Tyler O'Neill", 'Yadier Molina']}
