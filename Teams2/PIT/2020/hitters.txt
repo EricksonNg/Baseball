@@ -1,0 +1,1 @@
+{'players': ['Adam Frazier', 'Andrew Susac', 'Anthony Alford', 'Bryan Reynolds', 'Cole Tucker', 'Colin Moran', 'Erik Gonzalez', 'Gregory Polanco', 'Guillermo Heredia', 'JT Riddle', 'Jacob Stallings', 'Jared Oliva', 'Jarrod Dyson', 'Jason Martin', 'John Ryan Murphy', 'Jose Osuna', 'Josh Bell', "Ke'Bryan Hayes", 'Kevin Newman', 'Nick Burdi', 'Phillip Evans', 'Will Craig']}

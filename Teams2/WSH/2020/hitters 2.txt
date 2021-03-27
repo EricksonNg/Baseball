@@ -1,0 +1,1 @@
+{'players': ['Adam Eaton', 'Andrew Stevenson', 'Asdrubal Cabrera', 'Brock Holt', 'Carter Kieboom', 'Emilio Bonifacio', 'Eric Thames', 'Howie Kendrick', 'Jake Noll', 'Josh Harrison', 'Juan Soto', 'Kurt Suzuki', 'Luis Garcia', 'Michael A. Taylor', 'Starlin Castro', 'Trea Turner', 'Victor Robles', 'Wilmer Difo', 'Yadiel Hernandez', 'Yan Gomes']}

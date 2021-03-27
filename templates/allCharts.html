@@ -1,0 +1,90 @@
+{% extends "main.html"  %}
+
+{% block body %}
+<form method="POST" action="" id = "forms">
+    {{ F.hidden_tag() }}
+    <div>
+    | {{F.year.label}} {{F.year(placeholder = "Year")}}
+    </div>
+    <div>
+    | {{F.team.label}} {{F.team(placeholder = "Team")}}
+    </div>
+    <div>
+    | {{F.types.label}} {{F.types(placeholder = "Progressive or Per Game")}}
+    </div>
+    <div>
+    | {{F.player.label}} {{F.player(placeholder = "Player")}}
+    </div>
+    <div>
+    | {{F.submit}} |
+    </div>
+</form>
+
+{% if playername %}
+<div id = "allC">
+
+    <div id = "flex-container"></div>
+
+    {% for category in allStats %}
+    <script>
+        var container = document.getElementById('flex-container')
+        var canvas = document.createElement('canvas')
+        canvas.id = "{{category}}"
+        canvas.style="border:1px solid tomato;"
+        canvas.width = "400"
+        canvas.height = "350"
+        container.appendChild(canvas)
+
+        Chart.defaults.global.responsive = false;
+        var ctx = document.getElementById("{{category}}").getContext('2d');
+        var chartData =
+        {
+          type: 'line',
+          data:
+          {
+              labels: {{dates | tojson }},
+              datasets:
+              [
+                {
+                    label: {{playername | tojson}} + "'s " + "{{category}}" + " (" + "{{type}}" + ")",
+                    data: {{allStats[category]}},
+                    backgroundColor: [
+                        'rgba(254, 90, 29, 0.8)'
+                    ],
+                    borderColor: [
+                        'black'
+                    ],
+                    borderWidth: 1,
+                    lineTension: 0
+                }
+              ]
+          },
+          options:
+          {
+               scales: {
+                    xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                            }
+                        }],
+                    yAxes: [{
+                            display: true,
+                            ticks: {
+                                min: 0
+                            }
+                        }]
+               },
+               animation: {
+                    duration: 0
+               }
+          }
+        }
+        var myChart = new Chart(ctx,chartData)
+    </script>
+
+    {% endfor %}
+</div>
+{% endif %}
+
+{%endblock%}

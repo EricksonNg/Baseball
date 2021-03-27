@@ -1,0 +1,1 @@
+{'players': ['Austin Allen', 'Chad Pinder', 'Franklin Barreto', 'Jake Lamb', 'Jonah Heim', 'Khris Davis', 'Marcus Semien', 'Mark Canha', 'Matt Chapman', 'Matt Olson', 'Nate Orf', 'Ramon Laureano', 'Robbie Grossman', 'Sean Murphy', 'Seth Brown', 'Stephen Piscotty', 'Tommy La Stella', 'Tony Kemp', 'Vimael Machin']}

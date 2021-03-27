@@ -1,0 +1,65 @@
+{% extends "main.html"  %}
+
+{% block body %}
+<form method="POST" action="" id = "forms">
+    {{ F.hidden_tag() }}
+    <div>
+    | {{F.year.label}} {{F.year(placeholder = "Year")}}
+    </div>
+    <div>
+    | {{F.team.label}} {{F.team(placeholder = "Team")}}
+    </div>
+    <div>
+    | {{F.player.label}} {{F.player(placeholder = "Player")}}
+    </div>
+    <div>
+    | {{F.submit}} |
+    </div>
+</form>
+
+{% if playername %}
+<div id = "game-logs">
+<table>
+  <tr>
+    <th id = "label">Dates & Team Vs.</th>
+    <th>Pos.</th>
+    {% for category in order %}
+      <th>{{order[category]}}</th>
+    {% endfor %}
+  </tr>
+
+  {% for i in range(len(dates)) %}
+  <tr>
+    <td id = "dates">{{dates[i]}}</td>
+    <td>{{positions[i]}}</td>
+    {% for category in order %}
+    <td>{{perGameData[category][i]}}</td>
+    {% endfor %}
+  </tr>
+  {% endfor %}
+
+</table>
+</div>
+
+<div id = "season-log">
+  <table>
+    <tr>
+      <th>Season</th>
+      {% for category in seasonOrder %}
+      <th>{{seasonOrder[category]}}</th>
+    {% endfor %}
+    </tr>
+
+    <tr>
+      <td>2020</td>
+      {% for category in seasonOrder %}
+      <td>{{progressionData[category][-1]}}</td>
+      {% endfor %}
+    </tr>
+
+  </table>
+</div>
+
+{% endif %}
+
+{%endblock%}

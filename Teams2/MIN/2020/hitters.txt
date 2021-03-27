@@ -1,0 +1,1 @@
+{'players': ['Aaron Whitefield', 'Alex Avila', 'Brent Rooker', 'Byron Buxton', 'Eddie Rosario', 'Ehire Adrianza', 'Ildemaro Vargas', 'Jake Cave', 'Jorge Polanco', 'Josh Donaldson', 'LaMonte Wade Jr', 'Luis Arraez', 'Marwin Gonzalez', 'Max Kepler', 'Miguel Sano', 'Mitch Garver', 'Nelson Cruz', 'Ryan Jeffers', 'Travis Blankenhorn', 'Willians Astudillo']}
