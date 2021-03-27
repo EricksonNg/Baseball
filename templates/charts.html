@@ -10,25 +10,21 @@
       var myChart = new Chart(ctx, {
           type: 'pie',
           data: {
-              labels: ['Four-Seam Fastball', 'Changeup', 'Curveball', 'Sinker', 'Slider', 'Slow Curve'],
+              labels: {{pitchName | tojson}},
               datasets: [{
                   label: '# of Votes',
-                  data: [369, 308, 219, 132, 109, 8],
+                  data: {{pitchAmount | tojson}},
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
                       'rgba(54, 162, 235, 0.2)',
                       'rgba(255, 206, 86, 0.2)',
-                      'rgba(75, 192, 192, 0.2)',
-                      'rgba(153, 102, 255, 0.2)',
-                      'rgba(255, 159, 64, 0.2)'
+                      'rgba(75, 192, 192, 0.2)'
                   ],
                   borderColor: [
                       'rgba(255, 99, 132, 1)',
                       'rgba(54, 162, 235, 1)',
                       'rgba(255, 206, 86, 1)',
-                      'rgba(75, 192, 192, 1)',
-                      'rgba(153, 102, 255, 1)',
-                      'rgba(255, 159, 64, 1)'
+                      'rgba(75, 192, 192, 1)'
                   ],
                   borderWidth: 1
               }]
@@ -45,5 +41,4 @@
       });
       </script>
   </div>
-<img src="https://img.mlbstatic.com/mlb-photos/image/upload/w_426,q_100/v1/people/573262/headshot/67/current" height = "200">
 {%endblock%}

@@ -10,8 +10,8 @@ first = {}
 second = {}
 wildcard = {}
 standings = statsapi.get('standings', {'leagueId': 104})
-sched = statsapi.schedule(start_date=today)
-sched2 = statsapi.schedule(start_date=tomorrow)
+sched = statsapi.schedule(start_date='09/27/2020')
+sched2 = statsapi.schedule(tomorrow)
 # print(standings)
 percentages = []
 test = []
@@ -28,7 +28,7 @@ for e in range(len(standings['records'])):
         after_loss = round(wins / (wins + (losses + 1)), 3)
         percentage = float(standings['records'][e]['teamRecords'][i]['leagueRecord']['pct'])
         while found == 'False':
-            for i in range (len(sched)):
+            for i in range(len(sched)):
                 home_team = sched[i]['home_name']
                 away_team = sched[i]['away_name']
                 if home_team == name or away_team==name:
@@ -58,7 +58,7 @@ for e in range(len(standings['records'])):
             wildcard[output]=league_rank
 if test[2]==test[1]:
     extra = 1
-elif test[3]==test[1]:
+if test[3]==test[1]:
     extra = 2
 sorted_first = sorted(first.items(), key=operator.itemgetter(1))
 sorted_second = sorted(second.items(), key=operator.itemgetter(1))

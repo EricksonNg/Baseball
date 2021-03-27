@@ -6,43 +6,52 @@ def p(playername, category, year, team):
             content_dict = eval(content)
         except Exception as e:
             input(e)
-        index = content_dict[playername]['hitting']['progression']
-        ID = content_dict[playername]["ID"]
-        dates = content_dict[playername]['hitting']['dates']
-        flyOuts = index['fly outs']
-        groundOuts = index['ground outs']
-        runs = index['runs']
-        doubles = index['doubles']
-        triples = index['triples']
-        homeRuns = index['home runs']
-        strikeOuts = index['strike outs']
-        walks = index['walks']
-        intentionalWalks = index['intentional walks']
-        hits = index['hits']
-        hitByPitches = index['hbp']
-        average = index['avg']
-        atBats = index['ab']
-        onBasePercentage = index['obp']
-        slugging = index['slg']
-        onBasePlusSlugging = index['ops']
-        caughtStealings = index['cs']
-        stolenBases = index['sb']
-        stolenBasePercentage = index['sbp']
-        groundedIntoDoublePlays = index['gidp']
-        groundedIntoTriplePlays = index['gitp']
-        plateAppearances = index['pa']
-        totalBases = index['total bases']
-        runsBattedIn = index['rbi']
-        leftOnBase = index['lob']
-        sacBunts = index['sac bunts']
-        sacFlies = index['sac flies']
-        battingAverageOnBallsInPlay = index['babip']
-        catchersInterfences = index['ci']
-        pickoffs = index['pickoffs']
-        atBatsPerHomeRun = index['ab per hr']
+    index = content_dict[playername]['hitting']['progression']
+    ID = content_dict[playername]["ID"]
+    dates = content_dict[playername]['hitting']['dates']
+    flyOuts = index['fly outs']
+    groundOuts = index['ground outs']
+    runs = index['runs']
+    doubles = index['doubles']
+    triples = index['triples']
+    homeRuns = index['home runs']
+    strikeOuts = index['strike outs']
+    walks = index['walks']
+    intentionalWalks = index['intentional walks']
+    hits = index['hits']
+    hitByPitches = index['hbp']
+    average = index['avg']
+    atBats = index['ab']
+    onBasePercentage = index['obp']
+    slugging = index['slg']
+    onBasePlusSlugging = index['ops']
+    caughtStealings = index['cs']
+    stolenBases = index['sb']
+    stolenBasePercentage = index['sbp']
+    groundedIntoDoublePlays = index['gidp']
+    groundedIntoTriplePlays = index['gitp']
+    plateAppearances = index['pa']
+    totalBases = index['total bases']
+    runsBattedIn = index['rbi']
+    leftOnBase = index['lob']
+    sacBunts = index['sac bunts']
+    sacFlies = index['sac flies']
+    battingAverageOnBallsInPlay = index['babip']
+    catchersInterfences = index['ci']
+    pickoffs = index['pickoffs']
+    atBatsPerHomeRun = index['ab per hr']
+    iso = index['iso']
+    extraBaseHits = index['extra-base hits']
+    strikeOutPercentage = index['strike out percentage']
 
     # sanitize
     stat = {
+        'Strikeout Percentage': strikeOutPercentage,
+
+        'ISO': iso,
+
+        'Extra-Base Hits': extraBaseHits,
+
         'Fly Outs': flyOuts,
 
         'Ground Outs': groundOuts,
@@ -196,6 +205,12 @@ def p(playername, category, year, team):
     }
 
     name = {
+        'Strikeout Percentage': 'Strike Out Percentage',
+
+        'ISO': 'ISO',
+
+        'Extra-Base Hits': 'Extra-Base Hits',
+
         'Fly Outs': 'Fly Outs',
 
         'Ground Outs': 'Ground Outs',
@@ -350,7 +365,6 @@ def p(playername, category, year, team):
 
     return dates, stat[category], playername + "'s " + name[category] + " (Progressive)"
 
-
 def pg(playername, category, year, team):
 
     with open("Teams/" + team + "/" + year + "/" + playername + ".txt", "r") as FILE:
@@ -359,36 +373,38 @@ def pg(playername, category, year, team):
             content_dict = eval(content)
         except Exception as e:
             input(e)
-        index = content_dict[playername]['hitting']['per_game']
-        ID = content_dict[playername]["ID"]
-        dates = content_dict[playername]['hitting']['dates']
-        flyOuts = index['fly outs']
-        groundOuts = index['ground outs']
-        runs = index['runs']
-        doubles = index['doubles']
-        triples = index['triples']
-        homeRuns = index['home runs']
-        strikeOuts = index['strike outs']
-        walks = index['walks']
-        intentionalWalks = index['intentional walks']
-        hits = index['hits']
-        hitByPitches = index['hbp']
-        atBats = index['ab']
-        caughtStealings = index['cs']
-        stolenBases = index['sb']
-        stolenBasePercentage = index['sbp']
-        groundedIntoDoublePlays = index['gidp']
-        groundedIntoTriplePlays = index['gitp']
-        plateAppearances = index['pa']
-        totalBases = index['total bases']
-        runsBattedIn = index['rbi']
-        leftOnBase = index['lob']
-        sacBunts = index['sac bunts']
-        sacFlies = index['sac flies']
-        catchersInterfences = index['ci']
-        pickoffs = index['pickoffs']
+    index = content_dict[playername]['hitting']['per_game']
+    ID = content_dict[playername]["ID"]
+    dates = content_dict[playername]['hitting']['dates']
+    flyOuts = index['fly outs']
+    groundOuts = index['ground outs']
+    runs = index['runs']
+    doubles = index['doubles']
+    triples = index['triples']
+    homeRuns = index['home runs']
+    strikeOuts = index['strike outs']
+    walks = index['walks']
+    intentionalWalks = index['intentional walks']
+    hits = index['hits']
+    hitByPitches = index['hbp']
+    atBats = index['ab']
+    caughtStealings = index['cs']
+    stolenBases = index['sb']
+    stolenBasePercentage = index['sbp']
+    groundedIntoDoublePlays = index['gidp']
+    groundedIntoTriplePlays = index['gitp']
+    plateAppearances = index['pa']
+    totalBases = index['total bases']
+    runsBattedIn = index['rbi']
+    leftOnBase = index['lob']
+    sacBunts = index['sac bunts']
+    sacFlies = index['sac flies']
+    catchersInterfences = index['ci']
+    pickoffs = index['pickoffs']
+    extraBaseHits = index['extra-base hits']
 
     stat = {
+        'Extra-Base Hits': extraBaseHits,
 
         'Fly Outs': flyOuts,
 
@@ -509,6 +525,8 @@ def pg(playername, category, year, team):
     }
 
     name = {
+        'Extra-Base Hits': 'Extra-Base Hits',
+
         'Fly Outs': 'Fly Outs',
 
         'Ground Outs': 'Ground Outs',

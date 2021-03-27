@@ -60,9 +60,15 @@ def p(playername, category, year, team):
         saveOpportunities = index['save opportunities']
         holds = index['holds']
         blownSaves = index['blown saves']
+        battingAverageAgainst = index['baa']
+        strikeOutPercentage = index['strike out percentage']
 
     # sanitize
     stat = {
+        'Strikeout Percentage': strikeOutPercentage,
+
+        'Batting Average Against': battingAverageAgainst,
+
         'Games': games,
 
         'Games Started': gamesStarted,
@@ -259,6 +265,10 @@ def p(playername, category, year, team):
     }
 
     name = {
+        'Strikeout Percentage': 'Strikeout Percentage',
+
+        'Batting Average Against': 'Batting Average Against',
+
         'Games': 'Games',
 
         'Games Started': 'Games Started',

@@ -14,16 +14,18 @@
   </head>
 
   <body>
-
     <!-- navigation bar -->
     <div id = "nav_bar">
       <ul>
         <li> <a {% if request.path =='/home' %}class="active"{% endif %} href="{{ url_for('homepage') }}">Home</a></li>
-        <li> <a {% if request.path =='/about' %}class="active"{% endif %} href="{{ url_for('about') }}">Standings</a></li>
+<!--        <li> <a {% if request.path =='/about' %}class="active"{% endif %} href="{{ url_for('about') }}">Standings</a></li>-->
         <li> <a {% if request.path =='/hitting' %}class="active"{% endif %} href="{{url_for('hitting')}}">Hitting</a></li>
         <li> <a {% if request.path =='/pitching' %}class="active"{% endif %} href="{{url_for('pitching')}}">Pitching</a></li>
-        <li> <a {% if request.path =='/schedule' %}class="active"{% endif %} href="{{ url_for('schedule') }}">Schedule</a></li>
-<!--        <li> <a {% if request.path =='/charts' %}class="active"{% endif %} href="{{ url_for('charts') }}">Charts</a></li>-->
+<!--        <li> <a {% if request.path =='/schedule' %}class="active"{% endif %} href="{{ url_for('schedule') }}">Schedule</a></li>-->
+        <li> <a {% if request.path =='/charts' %}class="active"{% endif %} href="{{ url_for('charts') }}">Charts</a></li>
+        <li> <a {% if request.path =='/all-charts' %}class="active"{% endif %} href="{{ url_for('allCharts') }}">All Charts</a></li>
+        <li> <a {% if request.path =='/linescore' %}class="active"{% endif %} href="{{ url_for('linescore') }}">Linescore</a></li>
+
       </ul>
     </div>
      

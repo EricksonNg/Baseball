@@ -1,8 +1,80 @@
+/* Table */
+
+#season-log {
+    width: 1180px;
+    overflow: auto;
+}
+
+table {
+  color: white;
+  font-family: arial, sans-serif;
+  width: 100%;
+  margin-top: 100px;
+}
+
+td, th {
+  border: 0.2px solid grey;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  position: sticky;
+  top: 53;
+  background-color: black;
+}
+
+tr:nth-child(even) {
+  background-color: tomato;
+}
+
+tr:nth-child(odd) {
+  background-color: black;
+}
+
+/* ALl Charts */
+
+#hitForm div {
+    display: flex;
+    justify-content: center;
+    background-color: tomato;
+}
+
+#flex-container {
+  display: flex;
+  background-color: white;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+#flex-container canvas {
+    background-color: Ivory;
+    margin: 5px;
+}
+
+#forms {
+    display: flex;
+    background-color: tomato;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#forms div{
+    font-size: 18;
+}
+
+#allC {
+    border: 3px solid tomato;
+}
+
 /*---------- Body ---------------*/
 body{
-  background-color:white;
-  margin-left: 20%;
-  margin-right: 20%;
+  background-color: white;
+  width: 100%;
 }
 
 /*-------- navigation bar----------- */
@@ -11,8 +83,7 @@ body{
   font-family: sans-serif;
   position:fixed;
   top:0;
-  width:70%;
-
+  width:100%;
 }
 
 #nav_bar ul{
@@ -24,7 +95,7 @@ body{
 }
 
 #nav_bar li a{
-  border-right: 1px solid #bbb;
+  border-right: 1px solid tomato;
   display:block;
   text-align: center;
   padding: 10px;
@@ -32,12 +103,12 @@ body{
   color:white;
   text-decoration: none;
   float:right;
-} 
+}
 
 #nav_bar li a:hover:not(.active){
   background-color:tomato;
   color:black;
-} 
+}
 
 #nav_bar li a.active{
   border-right:none;
@@ -64,6 +135,15 @@ body{
   padding:50px;
 }
 
-/* #chart{
-  
-} */
+#chart {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#chart canvas {
+    background-color: Ivory;
+    margin: 5px;
+    border: 1px solid tomato;
+}
+

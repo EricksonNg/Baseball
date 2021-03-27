@@ -1,0 +1,9 @@
+#if year is a key
+'{"' + playername + '": {"ID":"' + ID + '", "' + year + '": { "pitching" : {"dates": [], "progression": {}, "per_game": {}}, "hitting": {"dates": [], "progression": {}, "per_game": {}}, "fielding" : {"dates": [], "progression": {}, "per_game": {}}}}}'
+
+#if year is a key
+'{"' + playername + '": {"ID":"' + ID + '", "' + year + '": { "hitting" : {"dates": [], "progression": {}, "per_game": {}}, "fielding": {"dates": [], "progression": {}, "per_game": {}},"pitching": {"dates": [], "progression": {}, "per_game": {}}}}}'
+
+'{"' + playername + '": {"ID":"' + ID + '", "hitting" : {"dates": [], "progression": {}, "per_game": {}}, "fielding": {"dates": [], "positions": [], "progression": {}, "per_game": {}},"pitching": {"dates": [], "progression": {}, "per_game": {}}}}'
+
+'{"' + playername + '": {"ID":"' + ID + '", "pitching" : {"dates": [], "progression": {}, "per_game": {}}, "hitting": {"dates": [], "positions": [], "progression": {}, "per_game": {}}, "fielding" : {"dates": [], "progression": {}, "per_game": {}}}}'

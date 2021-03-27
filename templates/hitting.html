@@ -2,7 +2,7 @@
 
 {%  block body  %}
 
-<form method="POST" action="" onload="load()">
+<form method="POST" action="" id = "hitForm">
     {{ F.hidden_tag() }}
     <div>
     {{F.year.label}} {{F.year(placeholder = "Year")}}
@@ -10,16 +10,18 @@
     <div>
     {{F.team.label}} {{F.team(placeholder = "Team")}}
     {{F.player.label}} {{F.player(placeholder = "Player")}}
-    || {{F.team2.label}} {{F.team2(placeholder = "Team")}}
-    {{F.player2.label}} {{F.player2(placeholder = "Player")}}
-    </div>
-    <div>
     {{F.types.label}} {{F.types(placeholder = "Progressive or Per Game")}}
     {{F.category.label}} {{F.category(placeholder = "Category")}}
     </div>
+    <div>
+    {{F.team2.label}} {{F.team2(placeholder = "Team")}}
+    {{F.player2.label}} {{F.player2(placeholder = "Player")}}
     {{F.types2.label}} {{F.types2(placeholder = "Progressive or Per Game")}}
     {{F.category2.label}} {{F.category2(placeholder = "Category")}}
+    </div>
+    <div>
     {{F.submit}}
+    </div>
 </form>
 
 <script src="{{url_for('static', filename='script.js')}}"></script>
@@ -29,21 +31,13 @@
 <script src="{{url_for('static', filename='script5.js')}}"></script>
 <script src="{{url_for('static', filename='script6.js')}}"></script>
 
-<script>function load(){
-updateselectionfield();
-updateselectionfield2();
-updateselectionfield3();
-updateselectionfield4();
-console.log("Working");
-}</script>
-
 {% if player_category and player_date %}
 
 <!-- cancas element -->
 <div id="chart">
-    <canvas id="myChart" width="500" height="250"></canvas>
+    <canvas id="myChart" width="400" height="300"></canvas>
     {% if category2 and player_date %}
-    <canvas id="myChart2" width="500" height="250"></canvas>
+    <canvas id="myChart2" width="400" height="300"></canvas>
     {% endif %}
 </div>
 
@@ -53,40 +47,43 @@ console.log("Working");
       graph();
       function graph(){
       var ctx = document.getElementById('myChart').getContext('2d');
-      var myChart = new Chart(ctx,
-        {
+      var chartData =
+      {
           type: 'line',
-          data: {
+          data:
+          {
               labels: {{ player_date | tojson }},
-              datasets: [
-              {
-                  label: {{ category | tojson }},
-                  data: {{ player_category | tojson }},
-                  backgroundColor: [
-                      'rgba(254, 90, 29, 0.8)'
-                  ],
-                  borderColor: [
-                      'black'
-                  ],
-                  borderWidth: 1,
-                  lineTension: 0
-              }
-<!--              ,-->
-<!--              {-->
-<!--              label:"second line",-->
-<!--              data: {{ category2 | tojson }},-->
-<!--              backgroundColor: [-->
-<!--                      'rgba(0, 0, 0, 0.8)'-->
-<!--                  ],-->
-<!--              borderColor: [-->
-<!--                      'black'-->
-<!--                  ],-->
-<!--              borderWidth: 1,-->
-<!--              lineTension: 0-->
-<!--            }-->
-            ]
+              datasets:
+              [
+                {
+                    label: {{ category | tojson }},
+                    data: {{ player_category | tojson }},
+                    backgroundColor: [
+                        'rgba(254, 90, 29, 0.8)'
+                    ],
+                    borderColor: [
+                        'black'
+                    ],
+                    borderWidth: 1,
+                    lineTension: 0
+                }
+                // ,
+                // {
+                // label:"second line",
+                // data: {{ player_category2 | tojson }},
+                // backgroundColor: [
+                //         'rgba(0, 0, 0, 0.8)'
+                //     ],
+                // borderColor: [
+                //         'black'
+                //     ],
+                // borderWidth: 1,
+                // lineTension: 0
+                // }
+              ]
           },
-          options: {
+          options:
+          {
                scales: {
                     xAxes: [{
                             display: true,
@@ -102,7 +99,8 @@ console.log("Working");
                         }]
                 },
           }
-      })
+        }
+      var myChart = new Chart(ctx,chartData)
 
       };
 </script>

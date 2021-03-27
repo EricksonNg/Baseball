@@ -27,8 +27,8 @@ class HittingForm(FlaskForm):
     category2 = SelectField("Category:", choices=[])
     player = SelectField("Player:", choices=[], validators=[DataRequired()])
     player2 = SelectField("Player 2: ", choices=[])
-    team = SelectField("Team: ", choices = [('SF','SF'),('ARI','ARI'),('COL','COL'),('LAD','LAD'),('SD','SD'),('CHC','CHC'),('CIN','CIN'),('MIL','MIL'),('PIT','PIT'),('STL','STL'),('ATL','ATL'),('MIA','MIA'),('NYM','NYM'),('PHI','PHI'),('WSH','WSH'),('HOU','HOU'),('LAA','LAA'),('OAK','OAK'),('SEA','SEA'),('TEX','TEX'),('CWS','CWS'),('CLE','CLE'),('DET','DET'),('KC','KC'),('MIN','MIN'),('BAL','BAL'),('BOS','BOS'),('NYY','NYY'),('TB','TB'),('TOR','TOR')])
-    team2 = SelectField("Team: ", choices = [('SF','SF'),('ARI','ARI'),('COL','COL'),('LAD','LAD'),('SD','SD'),('CHC','CHC'),('CIN','CIN'),('MIL','MIL'),('PIT','PIT'),('STL','STL'),('ATL','ATL'),('MIA','MIA'),('NYM','NYM'),('PHI','PHI'),('WSH','WSH'),('HOU','HOU'),('LAA','LAA'),('OAK','OAK'),('SEA','SEA'),('TEX','TEX'),('CWS','CWS'),('CLE','CLE'),('DET','DET'),('KC','KC'),('MIN','MIN'),('BAL','BAL'),('BOS','BOS'),('NYY','NYY'),('TB','TB'),('TOR','TOR')])
+    team = SelectField("Team: ", choices = [('SF', 'SF'), ('ARI', 'ARI'), ('ATL', 'ATL'), ('BAL', 'BAL'), ('BOS', 'BOS'), ('CHC', 'CHC'), ('CIN', 'CIN'), ('CLE', 'CLE'), ('COL', 'COL'), ('CWS', 'CWS'), ('DET', 'DET'), ('HOU', 'HOU'), ('KC', 'KC'), ('LAA', 'LAA'), ('LAD', 'LAD'), ('MIA', 'MIA'), ('MIL', 'MIL'), ('MIN', 'MIN'), ('NYM', 'NYM'), ('NYY', 'NYY'), ('OAK', 'OAK'), ('PHI', 'PHI'), ('PIT', 'PIT'), ('SD', 'SD'), ('SEA', 'SEA'), ('STL', 'STL'), ('TB', 'TB'), ('TEX', 'TEX'), ('TOR', 'TOR'), ('WSH', 'WSH')])
+    team2 = SelectField("Team: ", choices = [('SF', 'SF'), ('ARI', 'ARI'), ('ATL', 'ATL'), ('BAL', 'BAL'), ('BOS', 'BOS'), ('CHC', 'CHC'), ('CIN', 'CIN'), ('CLE', 'CLE'), ('COL', 'COL'), ('CWS', 'CWS'), ('DET', 'DET'), ('HOU', 'HOU'), ('KC', 'KC'), ('LAA', 'LAA'), ('LAD', 'LAD'), ('MIA', 'MIA'), ('MIL', 'MIL'), ('MIN', 'MIN'), ('NYM', 'NYM'), ('NYY', 'NYY'), ('OAK', 'OAK'), ('PHI', 'PHI'), ('PIT', 'PIT'), ('SD', 'SD'), ('SEA', 'SEA'), ('STL', 'STL'), ('TB', 'TB'), ('TEX', 'TEX'), ('TOR', 'TOR'), ('WSH', 'WSH')])
     # team = StringField("Team: ")
     submit = SubmitField("->")
 
@@ -41,6 +41,19 @@ class PitchingForm(FlaskForm):
     category2 = SelectField("Category:", choices=[])
     player = SelectField("Player:", choices=[], validators=[DataRequired()])
     player2 = SelectField("Player 2: ", choices=[])
-    team = SelectField("Team: ", choices=[('SF', 'SF'), ('ARI', 'ARI'), ('COL', 'COL'), ('LAD', 'LAD'), ('SD', 'SD'), ('CHC', 'CHC'), ('CIN', 'CIN'), ('MIL', 'MIL'), ('PIT', 'PIT'), ('STL', 'STL'), ('ATL', 'ATL'), ('MIA', 'MIA'), ('NYM', 'NYM'), ('PHI', 'PHI'), ('WSH', 'WSH'), ('HOU', 'HOU'), ('LAA', 'LAA'), ('OAK', 'OAK'), ('SEA', 'SEA'), ('TEX', 'TEX'), ('CWS', 'CWS'), ('CLE', 'CLE'), ('DET', 'DET'), ('KC', 'KC'), ('MIN', 'MIN'), ('BAL','BAL'), ('BOS', 'BOS'), ('NYY', 'NYY'), ('TB', 'TB'), ('TOR', 'TOR')])
-    team2 = SelectField("Team: ", choices=[('SF', 'SF'), ('ARI', 'ARI'), ('COL', 'COL'), ('LAD', 'LAD'), ('SD', 'SD'), ('CHC', 'CHC'), ('CIN', 'CIN'), ('MIL', 'MIL'), ('PIT', 'PIT'), ('STL', 'STL'), ('ATL', 'ATL'), ('MIA', 'MIA'), ('NYM', 'NYM'), ('PHI', 'PHI'), ('WSH', 'WSH'), ('HOU', 'HOU'), ('LAA', 'LAA'), ('OAK', 'OAK'), ('SEA', 'SEA'), ('TEX', 'TEX'), ('CWS', 'CWS'), ('CLE', 'CLE'), ('DET', 'DET'), ('KC', 'KC'), ('MIN', 'MIN'), ('BAL', 'BAL'), ('BOS', 'BOS'), ('NYY', 'NYY'), ('TB', 'TB'), ('TOR', 'TOR')])
+    team = SelectField("Team: ", choices=[('SF', 'SF'), ('ARI', 'ARI'), ('ATL', 'ATL'), ('BAL', 'BAL'), ('BOS', 'BOS'),('CHC', 'CHC'), ('CIN', 'CIN'), ('CLE', 'CLE'), ('COL', 'COL'),('CWS', 'CWS'), ('DET', 'DET'), ('HOU', 'HOU'), ('KC', 'KC'), ('LAA', 'LAA'),('LAD', 'LAD'), ('MIA', 'MIA'), ('MIL', 'MIL'), ('MIN', 'MIN'),('NYM', 'NYM'), ('NYY', 'NYY'), ('OAK', 'OAK'), ('PHI', 'PHI'),('PIT', 'PIT'), ('SD', 'SD'), ('SEA', 'SEA'), ('STL', 'STL'), ('TB', 'TB'),('TEX', 'TEX'), ('TOR', 'TOR'), ('WSH', 'WSH')])
+    team2 = SelectField("Team: ", choices=[('SF', 'SF'), ('ARI', 'ARI'), ('ATL', 'ATL'), ('BAL', 'BAL'), ('BOS', 'BOS'),('CHC', 'CHC'), ('CIN', 'CIN'), ('CLE', 'CLE'), ('COL', 'COL'),('CWS', 'CWS'), ('DET', 'DET'), ('HOU', 'HOU'), ('KC', 'KC'), ('LAA', 'LAA'),('LAD', 'LAD'), ('MIA', 'MIA'), ('MIL', 'MIL'), ('MIN', 'MIN'),('NYM', 'NYM'), ('NYY', 'NYY'), ('OAK', 'OAK'), ('PHI', 'PHI'),('PIT', 'PIT'), ('SD', 'SD'), ('SEA', 'SEA'), ('STL', 'STL'), ('TB', 'TB'),('TEX', 'TEX'), ('TOR', 'TOR'), ('WSH', 'WSH')])
+    submit = SubmitField("->")
+
+class allChartsForm(FlaskForm):
+    year = SelectField("Year:", choices=[('2020', '2020'), ('2019', '2019')], validators=[DataRequired()])
+    types = SelectField("Category Type:", choices=[('Progressive', 'Progressive'), ('Per Game', 'Per Game')], validators=[DataRequired()])
+    player = SelectField("Player:", choices=[], validators=[DataRequired()])
+    team = SelectField("Team: ", choices=[('SF', 'SF'), ('ARI', 'ARI'), ('ATL', 'ATL'), ('BAL', 'BAL'), ('BOS', 'BOS'),('CHC', 'CHC'), ('CIN', 'CIN'), ('CLE', 'CLE'), ('COL', 'COL'),('CWS', 'CWS'), ('DET', 'DET'), ('HOU', 'HOU'), ('KC', 'KC'), ('LAA', 'LAA'),('LAD', 'LAD'), ('MIA', 'MIA'), ('MIL', 'MIL'), ('MIN', 'MIN'),('NYM', 'NYM'), ('NYY', 'NYY'), ('OAK', 'OAK'), ('PHI', 'PHI'),('PIT', 'PIT'), ('SD', 'SD'), ('SEA', 'SEA'), ('STL', 'STL'), ('TB', 'TB'),('TEX', 'TEX'), ('TOR', 'TOR'), ('WSH', 'WSH')])
+    submit = SubmitField("->")
+
+class linescoreForm(FlaskForm):
+    year = SelectField("Year:", choices=[('2020', '2020'), ('2019', '2019')], validators=[DataRequired()])
+    player = SelectField("Player:", choices=[], validators=[DataRequired()])
+    team = SelectField("Team: ", choices=[('SF', 'SF'), ('ARI', 'ARI'), ('ATL', 'ATL'), ('BAL', 'BAL'), ('BOS', 'BOS'),('CHC', 'CHC'), ('CIN', 'CIN'), ('CLE', 'CLE'), ('COL', 'COL'),('CWS', 'CWS'), ('DET', 'DET'), ('HOU', 'HOU'), ('KC', 'KC'), ('LAA', 'LAA'),('LAD', 'LAD'), ('MIA', 'MIA'), ('MIL', 'MIL'), ('MIN', 'MIN'),('NYM', 'NYM'), ('NYY', 'NYY'), ('OAK', 'OAK'), ('PHI', 'PHI'),('PIT', 'PIT'), ('SD', 'SD'), ('SEA', 'SEA'), ('STL', 'STL'), ('TB', 'TB'),('TEX', 'TEX'), ('TOR', 'TOR'), ('WSH', 'WSH')])
     submit = SubmitField("->")

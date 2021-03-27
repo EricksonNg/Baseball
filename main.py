@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from forms import ScheduleSearchForm, TestingForm, HittingForm, PitchingForm
+from forms import ScheduleSearchForm, TestingForm, HittingForm, PitchingForm, allChartsForm, linescoreForm
 import mlbapi
 # from standings import standings
 import selections
@@ -7,7 +7,6 @@ import git
 
 app = Flask('app')
 app.config["SECRET_KEY"] = "1234"
-
 
 # Python decorator
 @app.route('/')
@@ -17,11 +16,21 @@ def homepage():
     return render_template(
         "index.html")
 
-
 @app.route("/about", methods=["GET", "POST"])
 def about():
     return render_template("about.html")
 
+@app.route("/charts", methods= ["GET", "POST"])
+def charts():
+    from hit2021 import getID
+    from allPitchData import pitchCharts
+    # id = getID("Mike Yastrzemski", "2020", "SF")
+    # link = "https://img.mlbstaticage/upload/w_426,q_10v1/people/" + id + "/headshot/67/current"
+
+    pitchName, pitchAmount = pitchCharts("Drew Smyly", "SF", "Lefties")
+    print(pitchName, pitchAmount)
+
+    return render_template("charts.html", pitchName = pitchName, pitchAmount = pitchAmount)
 
 hit = {
     "P": selections.h_p_categories,
@@ -43,27 +52,36 @@ year = "2020" # Gives a default value for year (having a year variable specified
 selected = "Progressive"  # Do not put inside the the function where "selected" is called (it will cause the selectfield to go back to the choices for "Progressive" after submitting)
 selected2 = "Optional"
 team = "SF"
+print("Team is SF")
 team2 = "SF"
+print("Team2 is SF")
 page = "hitting"  # giving page a default value (doesn't really affect anything)
 
 @app.route("/hitting", methods=["GET", "POST"])
 def hitting():
     from hit2021 import p, pg
     global page, selected, selected2, team, team2, year
+    print("1", team, team2)
 
     if page != "hitting":
+        print("Page wasn't \"Hitting\"")
         year = "2020"
         selected = "Progressive"  # changes dynamic selectfield back to the progressive choices after page change
         selected2 = "Optional"
         team = "SF"
+        team2 = "SF"
         category2 = 'Optional'
     page = "hitting"  # helps differentiate hitting and pitching category choices in resend_selectionForm_data function
 
+    print("2", team, team2)
+
+    print("Making forms")
     form = HittingForm()
     form.category.choices = hit[selected]()
     form.category2.choices = hit[selected2]()
     form.player.choices = selections.all_hitters(team, year)
     form.player2.choices = selections.all_hitters(team2, year)
+    print("Forms should be done")
 
     if form.validate_on_submit():
         print("POST REQUEST COMPLETED!")
@@ -76,10 +94,6 @@ def hitting():
         team2 = request.form.to_dict(flat=False)["team2"][0]
         category = request.form.to_dict(flat=False)["category"][0]
         category2 = request.form.to_dict(flat=False)["category2"][0]
-        if 'Select A Player' in playername2:
-            print("1: A player is not selected for the second player form")
-            playername2 = playername
-            team2 = team
         if 'Select A Player' in playername:
             print("A player is not selected at all")
             a = None
@@ -92,20 +106,11 @@ def hitting():
             a, b, c = p(playername, category, year, team)
         elif types == 'PG' or types == 'per game' or types == 'Per game' or types == 'Per Game':
             a, b, c = pg(playername, category, year, team)
-        if 'Select A Player' in playername:
-            print("2: A player is not selected for the second player form")
-            a = None
-            b = None
-            c = None
-            d = None
-            e = None
-            f = None
-        if category2 == '':
-            print("The second category form is empty")
-            d = None
-            e = None
-            f = None
-        elif types2 == 'Optional':
+
+        if 'Select A Player' in playername2:
+            print("1: A player is not selected for the second player form")
+            playername2 = playername
+        if types2 == 'Optional':
             print("The second types form is empty")
             d = None
             e = None
@@ -133,21 +138,27 @@ def hitting():
 def pitching():
     from pitch2021 import p, pg
     global page, selected, selected2, team, team2, year
+    print("3", team, team2)
 
     if page != "pitching":
+        print("Page wasn't \"Pitching\"")
         year = "2020"
         selected = "Progressive"  # changes dynamic selectfield back to the progressive choices after page change
         selected2 = "Optional"
         team = "SF"
+        team2 = "SF"
         category2 = 'Optional'
+    print("4", team, team2)
 
     page = "pitching"  # helps differentiate hitting and pitching category choices in resend_selectionForm_data function
 
+    print("Making forms")
     form = PitchingForm()
     form.category.choices = pitch[selected]()
     form.category2.choices = pitch[selected2]()
     form.player.choices = selections.all_pitchers(team, year)
     form.player2.choices = selections.all_pitchers(team2, year)
+    print("Forms should be finished")
 
     if form.validate_on_submit():
         print("POST REQUEST COMPLETED!")
@@ -163,7 +174,6 @@ def pitching():
         if 'Select A Player' in playername2:
             print("1: A player is not selected for the second player form")
             playername2 = playername
-            team2 = team
         if 'Select A Player' in playername:
             print("A player is not selected at all")
             a = None
@@ -200,7 +210,7 @@ def pitching():
             f, d, e = pg(playername2, category2, year, team2)
 
         return render_template(
-            "hitting.html", F=form,
+            "pitching.html", F=form,
             player_date=a,
             player_date2=f,
             player_category=b,
@@ -212,6 +222,56 @@ def pitching():
     return render_template(
         "pitching.html",
         F=form)
+
+# @app.route("/fielding", methods=["GET", "POST"])
+# def fielding():
+
+@app.route('/all-charts', methods=["GET", "POST"])
+def allCharts():
+    global team, year
+    from allCategories import all, allChartsPG
+
+    form = allChartsForm()
+    form.player.choices = selections.all_hitters(team, year)
+    playername = None # Setting playername as None here allows for the div where all the charts to show up only after the forms are submitted (so there won't be an empty outline)
+
+    if form.validate_on_submit():
+        print("POST REQUEST COMPLETED!")
+        year = request.form.to_dict(flat=False)["year"][0]
+        types = request.form.to_dict(flat=False)["types"][0]
+        playername = request.form.to_dict(flat=False)["player"][0]
+        team = request.form.to_dict(flat=False)["team"][0]
+        if types == "Progressive":
+            allStats, dates = all(team, year, playername)
+        if types == "Per Game":
+            allStats, dates = allChartsPG(team, year, playername)
+
+        return render_template("allCharts.html", F = form, range=range, len=len, dates=dates, allStats=allStats, playername=playername, type = types)
+
+    return render_template(
+        "allCharts.html", F = form)
+
+@app.route('/linescore', methods=["GET", "POST"])
+def linescore():
+    global team, year
+    from allCategories import allpg, allp
+
+    form = linescoreForm()
+    form.player.choices = selections.all_hitters(team, year)
+    playername = None # Setting playername as None here allows for the div where all the charts to show up only after the forms are submitted (so there won't be an empty outline)
+
+    if form.validate_on_submit():
+        print("POST REQUEST COMPLETED!")
+        year = request.form.to_dict(flat=False)["year"][0]
+        playername = request.form.to_dict(flat=False)["player"][0]
+        team = request.form.to_dict(flat=False)["team"][0]
+        perGameData, dates, order, positions = allpg(team, year, playername)
+        progressionData, seasonOrder = allp(team, year, playername)
+
+        return render_template("linescore.html", F = form, range= range, len= len, perGameData = perGameData, playername=playername, order = order, positions = positions, dates = dates, progressionData = progressionData, seasonOrder = seasonOrder)
+
+    return render_template(
+        "linescore.html", F = form)
 
 #first category form
 @app.route("/getdata/<types>")
@@ -314,7 +374,6 @@ def resend_selectionForm_data5(types):
         print("This means that year now is:", year)
 
         return (jsonify({"data": selections.all_pitchers(team, year)}))
-
 
 #year form (this one is for the second player form)
 @app.route("/getdata6/<types>")
