@@ -1,0 +1,4 @@
+flask
+statsapi
+wtforms
+flask_wtf
