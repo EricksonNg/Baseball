@@ -9,7 +9,7 @@ description = ""
 name = "pythonflask"
 version = "0.1.0"
 [tool.poetry.dependencies]
-Flask = "^1.1"
+Flask = "^2.3"
 MLB-StatsAPI = "^0.1.7"
 WTForms = "^2.3"
 flask-wtf = "^0.14.3"
